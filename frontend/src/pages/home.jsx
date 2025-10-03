@@ -753,8 +753,6 @@ const GitHubContributions = ({ darkMode }) => {
   const [contributions, setContributions] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showTokenInput, setShowTokenInput] = useState(false);
-  const [userToken, setUserToken] = useState('');
 
   const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
   const USERNAME = 'tajagn01';
@@ -766,9 +764,8 @@ const GitHubContributions = ({ darkMode }) => {
         setError(null);
 
         // Check if GitHub token is available
-        const tokenToUse = GITHUB_TOKEN || userToken;
-        if (!tokenToUse) {
-          // Generate mock data instead of showing error
+        if (!GITHUB_TOKEN) {
+          // Generate mock data if no token is available
           const mockContributions = generateMockContributions();
           setContributions(mockContributions);
           return;
@@ -797,7 +794,7 @@ const GitHubContributions = ({ darkMode }) => {
         const response = await fetch('https://api.github.com/graphql', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${tokenToUse}`,
+            'Authorization': `Bearer ${GITHUB_TOKEN}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -826,7 +823,7 @@ const GitHubContributions = ({ darkMode }) => {
     };
 
     fetchContributions();
-  }, [userToken]);
+  }, []);
 
   const getContributionColor = (level, darkMode) => {
     const colors = {
@@ -845,115 +842,6 @@ const GitHubContributions = ({ darkMode }) => {
         <div className="flex items-center justify-center">
           <div className={`animate-spin rounded-full h-8 w-8 border-b-2 ${darkMode ? 'border-white' : 'border-black'}`}></div>
           <span className={`ml-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Loading GitHub contributions...</span>
-        </div>
-      </div>
-    );
-  }
-
-  // Show token input if no token is available and mock data is being used
-  const needsToken = !GITHUB_TOKEN && !userToken;
-  if (needsToken && contributions && !showTokenInput) {
-    return (
-      <div className={`rounded-2xl border p-8 ${darkMode ? 'border-gray-700 bg-gray-900/50' : 'border-gray-200 bg-gray-50/50'}`}>
-        <div className="text-center">
-          <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-black'}`}>
-            GitHub Contributions
-          </h3>
-          <p className={`mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            {contributions.totalContributions} contributions in the last year
-          </p>
-          <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            Currently showing mock data. Add your GitHub token to see real contribution data.
-          </p>
-          <button
-            onClick={() => setShowTokenInput(true)}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${darkMode ? 'bg-white text-black hover:bg-gray-100' : 'bg-black text-white hover:bg-gray-800'}`}
-          >
-            Add GitHub Token
-          </button>
-        </div>
-        
-        {/* Mock contributions grid */}
-        <div className="mt-6">
-          <div className="flex items-center gap-2 mb-4">
-            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Less</span>
-            <div className="flex gap-1">
-              {['NONE', 'FIRST_QUARTILE', 'SECOND_QUARTILE', 'THIRD_QUARTILE', 'FOURTH_QUARTILE'].map(level => (
-                <div
-                  key={level}
-                  className={`w-3 h-3 rounded-sm ${getContributionColor(level, darkMode)}`}
-                />
-              ))}
-            </div>
-            <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>More</span>
-          </div>
-
-          <div className="overflow-x-auto">
-            <div className="flex gap-1 min-w-max">
-              {contributions.weeks.map((week, weekIndex) => (
-                <div key={weekIndex} className="flex flex-col gap-1">
-                  {week.contributionDays.map((day, dayIndex) => (
-                    <div
-                      key={dayIndex}
-                      className={`w-3 h-3 rounded-sm ${getContributionColor(day.contributionLevel, darkMode)} hover:ring-2 hover:ring-blue-500 transition-all cursor-pointer`}
-                      title={`${day.contributionCount} contributions on ${new Date(day.date).toLocaleDateString()}`}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Show token input form
-  if (showTokenInput) {
-    return (
-      <div className={`rounded-2xl border p-8 ${darkMode ? 'border-gray-700 bg-gray-900/50' : 'border-gray-200 bg-gray-50/50'}`}>
-        <div className="text-center">
-          <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-black'}`}>
-            GitHub Contributions Setup
-          </h3>
-          <p className={`mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            Enter your GitHub Personal Access Token to see real contribution data
-          </p>
-          <div className="max-w-md mx-auto mb-4">
-            <input
-              type="password"
-              value={userToken}
-              onChange={(e) => setUserToken(e.target.value)}
-              placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-              className={`w-full p-3 rounded-lg border ${darkMode ? 'bg-gray-800 border-gray-600 text-white' : 'bg-white border-gray-300 text-black'}`}
-            />
-          </div>
-          <div className="flex gap-3 justify-center">
-            <button
-              onClick={() => {
-                if (userToken.trim()) {
-                  setShowTokenInput(false);
-                  setLoading(true);
-                }
-              }}
-              disabled={!userToken.trim()}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${userToken.trim() ? (darkMode ? 'bg-white text-black hover:bg-gray-100' : 'bg-black text-white hover:bg-gray-800') : 'bg-gray-500 text-gray-300 cursor-not-allowed'}`}
-            >
-              Load Contributions
-            </button>
-            <button
-              onClick={() => {
-                setShowTokenInput(false);
-                setUserToken('');
-              }}
-              className={`px-4 py-2 rounded-lg font-medium border transition-colors ${darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-800' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}
-            >
-              Cancel
-            </button>
-          </div>
-          <p className={`text-xs mt-3 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-            Your token is stored locally and never sent to any server except GitHub's API
-          </p>
         </div>
       </div>
     );
