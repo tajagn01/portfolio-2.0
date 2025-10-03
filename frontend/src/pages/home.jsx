@@ -763,13 +763,20 @@ const GitHubContributions = ({ darkMode }) => {
         setLoading(true);
         setError(null);
 
+        // Debug: Log token availability (remove this after debugging)
+        console.log('GitHub token available:', !!GITHUB_TOKEN);
+        console.log('Token starts with ghp_:', GITHUB_TOKEN?.startsWith('ghp_'));
+
         // Check if GitHub token is available
         if (!GITHUB_TOKEN) {
+          console.log('No GitHub token found, using mock data');
           // Generate mock data if no token is available
           const mockContributions = generateMockContributions();
           setContributions(mockContributions);
           return;
         }
+
+        console.log('Fetching real GitHub contributions...');
 
         // GraphQL query to get contribution data
         const query = `
@@ -814,9 +821,13 @@ const GitHubContributions = ({ darkMode }) => {
         }
 
         setContributions(data.data.user.contributionsCollection.contributionCalendar);
+        console.log('Successfully fetched real GitHub contributions');
       } catch (err) {
-        setError(err.message);
         console.error('Error fetching GitHub contributions:', err);
+        setError(err.message);
+        // Fallback to mock data on error
+        const mockContributions = generateMockContributions();
+        setContributions(mockContributions);
       } finally {
         setLoading(false);
       }
