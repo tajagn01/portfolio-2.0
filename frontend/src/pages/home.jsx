@@ -8,7 +8,7 @@ import avatarImg from '../assets/imag.jpg';
 import resume from '../assets/Tajagn.pdf';
 import realcs from '../assets/realcs.png';
 import searchify from '../assets/searchify.png';  
-import secondBrainImg from '../assets/secondbrain.png';
+import secondBrainImg from '../assets/secondBrain.png';
 import velorant from '../assets/velorent.png';
 
 // Reusable SkillTag component
