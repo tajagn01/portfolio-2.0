@@ -6,6 +6,10 @@ import { SiTypescript, SiNextdotjs, SiPostgresql, SiBun, SiThreedotjs, SiReact, 
 import { BiFile } from 'react-icons/bi';
 import avatarImg from '../assets/imag.jpg';
 import resume from '../assets/Tajagn.pdf';
+import realcs from '../assets/realcs.png';
+import searchify from '../assets/searchify.png';  
+import secondBrainImg from '../assets/secondbrain.png';
+import velorant from '../assets/velorent.png';
 
 // Reusable SkillTag component
 const SkillTag = ({ icon, name }) => (
@@ -17,64 +21,64 @@ const SkillTag = ({ icon, name }) => (
 
 const projectsData = [
   {
-    name: "Doc.ai",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=350&fit=crop&crop=center",
-    shortDesc: "AI-powered website builder similar to v0/bolt. Generate websites using your own API keys with multiple LLM support.",
-    fullDesc: "AI-powered website builder similar to v0/bolt. Generate websites using your own API keys with multiple LLM support. Real-time website preview and editing capabilities with custom API integration.",
-    technologies: ["Next.js", "TypeScript", "Langchain"],
+    name: "Velorent — Valorant Remastered",
+    image: velorant,
+    shortDesc: "A Valorant-inspired landing experience with rich GSAP animations and interactions.",
+    fullDesc: `Valorant Remastered (Velorent) is a polished landing-site recreation inspired by an Awwwards entry. Built to learn advanced GSAP animation techniques and modern frontend patterns. Timeline: 1 week. Role: Frontend. Team: Solo. Status: Completed.`,
+    technologies: ["TypeScript", "React", "GSAP"],
     keyFeatures: [
-      "AI website generation with custom API keys",
-      "Multiple LLM integration (expanding)",
-      "Real-time website preview and editing"
+      "High-performance GSAP animations",
+      "Awwwards-style layout and interactions",
+      "Responsive, retina-ready imagery",
+      "Experimentation with 3D transforms and performance tuning"
     ],
-    github: "https://github.com/tajagn01/docai",
-    live: "https://docai-demo.com"
+    github: "https://github.com/tajagn01/Velorent-3D",
+    live: "https://velorent-3-d.vercel.app/"
   },
   {
     name: "Second Brain",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=500&h=350&fit=crop&crop=center",
-    shortDesc: "Intelligent link management platform with AI-powered search. Save and organize links from social platforms with browser extension support.",
-    fullDesc: "Comprehensive link management solution that acts as your digital second brain. Features AI-powered search capabilities, social media integration, and browser extension for seamless link saving and organization.",
-    technologies: ["React", "Node.js", "Browser Extension"],
+    image: secondBrainImg,
+    shortDesc: "Intelligent link management platform with AI-powered search and a browser extension for saving links.",
+    fullDesc: `Second Brain is an intelligent link management platform that saves and organizes links from social platforms. It includes a browser extension for one-click saving and AI-powered vector search for quick retrieval.`,
+    technologies: ["React", "TypeScript", "TailwindCSS", "Node.js", "Express.js", "AI Agents"],
     keyFeatures: [
-      "AI-powered intelligent search",
-      "Social platform integration",
-      "Browser extension support",
-      "Smart link categorization"
+      "Automatic data fetching from X and YouTube",
+      "AI-powered vector search with embeddings",
+      "Browser extension for one-click saving",
+      "Smart link categorization and organization"
     ],
     github: "https://github.com/tajagn01/second-brain",
-    live: "https://secondbrain-demo.com"
+    live: "https://secondbrain001.netlify.app/"
   },
   {
-    name: "Crux",
-    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=500&h=350&fit=crop&crop=center",
-    shortDesc: "Comprehensive job portal with separate interfaces for recruiters and job seekers. Features application tracking and profile management.",
-    fullDesc: "Full-featured job portal platform designed to connect recruiters and job seekers. Includes advanced application tracking system, profile management, and streamlined hiring processes for modern recruitment needs.",
+    name: "realcs",
+    image: realcs,
+    shortDesc: "A learning platform focused on coding and developer education.",
+    fullDesc: `RealCS is a learning platform focused on teaching coding and developer skills through interactive lessons, projects, and assessments. Built with a modern React stack to provide a smooth learning experience.`,
     technologies: ["React", "Node.js", "JavaScript"],
     keyFeatures: [
-      "Dual interface (recruiters/job seekers)",
-      "Application tracking system",
-      "Profile management",
-      "Advanced search and filtering"
+      "Interactive lessons and exercises",
+      "Project-based curriculum",
+      "Progress tracking and assessments"
     ],
-    github: "https://github.com/tajagn01/crux",
-    live: "https://crux-demo.com"
+    github: "https://github.com/tajagn01/Real_CS",
+    live: "https://realcs.netlify.app/"
   },
   {
-    name: "Research Assistance",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=350&fit=crop&crop=center",
-    shortDesc: "AI-powered research assistant built with Screenpipe. Analyzes your screen activity and generates timestamped research notes.",
-    fullDesc: "Intelligent research assistant that monitors your screen activity and automatically generates comprehensive, timestamped research notes. Built with Screenpipe for seamless integration with your workflow.",
-    technologies: ["Screenpipe", "Next.js", "TypeScript"],
+    name: "AI Visual Search (Searchify)",
+    image: searchify,
+    shortDesc: "AI-powered visual & multimodal search (text, image, voice) with a modern frontend and backend microservices.",
+    fullDesc: `AI Visual Search is a full-stack project offering text, image, and voice search. Image search uses Clarifai to detect likely objects and then queries product/search APIs. Frontend includes animated headings, category UI, and responsive product grids.`,
+    technologies: ["React", "Node.js", "Python (AI)", "Clarifai"],
     keyFeatures: [
-      "Automated screen activity analysis",
-      "Timestamped research notes",
-      "AI-powered content extraction",
-      "Workflow integration"
+      "Text, image & voice search",
+      "Clarifai-powered image keyword extraction",
+      "Combined API product search with INR conversion",
+      "Animated hero and responsive product cards"
     ],
-    github: "https://github.com/tajagn01/research-assistant",
-    live: "https://research-demo.com"
-  },
+    github: "https://github.com/tajagn01/ai-power-visual-search-",
+    live: "https://aisearch01.netlify.app/"
+  }
 ];
 
 export default function HomePage() {
