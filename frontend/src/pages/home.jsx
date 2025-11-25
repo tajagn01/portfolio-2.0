@@ -10,7 +10,7 @@ import realcs from '../assets/realcs.png';
 import searchify from '../assets/searchify.png';  
 import secondBrainImg from '../assets/secondBrain.png';
 import velorant from '../assets/velorent.png';
-
+import GitHubContribProgress from "../components/GitHubContribProgress";
 // Reusable SkillTag component
 const SkillTag = ({ icon, name }) => (
   <div className="flex items-center gap-2 bg-gray-800 dark:bg-gray-200 border border-gray-600 dark:border-gray-400 rounded-lg px-3 py-1.5 text-sm text-gray-200 dark:text-gray-800">
@@ -201,7 +201,7 @@ export default function HomePage() {
             <SkillTag icon={<SiTypescript size={18} color="#3178C6" />} name="TypeScript" />
             <SkillTag icon={<SiReact size={18} color="#61DAFB" />} name="React" />
             <SkillTag icon={<SiNextdotjs size={18} color={darkMode ? "#FFFFFF" : "#111111"} />} name="Next.js" />
-            <SkillTag icon={<SiBun size={18} color={darkMode ? "#f9d71c" : "#000000"} />} name="Bun" />
+            {/* <SkillTag icon={<SiBun size={18} color={darkMode ? "#f9d71c" : "#000000"} />} name="Bun" /> */}
           </span>
           <br />
           <span className="mt-4 block">
@@ -281,7 +281,7 @@ export default function HomePage() {
                 { icon: <SiTypescript size={30} color="#3178C6" />, label: "TypeScript" },
                 { icon: <SiPostman size={30} color="#FF6C37" />, label: "Postman" },
                 { icon: <SiNextdotjs size={30} color={darkMode ? "#FFFFFF" : "#111111"} />, label: "Next.js" },
-                { icon: <SiBun size={30} color={darkMode ? "#f9d71c" : "#000000"} />, label: "Bun" },
+                // { icon: <SiBun size={30} color={darkMode ? "#f9d71c" : "#000000"} />, label: "Bun" },
                 { icon: <SiPostgresql size={30} color="#336791" />, label: "PL/pgSQL" }
               ].map(({ icon, label }) => (
                 <div key={label} className="relative group cursor-pointer">
@@ -561,11 +561,10 @@ export default function HomePage() {
       </section>
 
       {/* GitHub Contributions Section */}
-      <section className="w-full min-h-screen flex items-center justify-center py-20">
-        <div className="w-full max-w-6xl mx-auto px-5 sm:px-10">
-          <GitHubContributions darkMode={darkMode} />
-        </div>
-      </section>
+      <div className="w-full flex justify-center mt-10 mb-10">
+        <GitHubContribProgress username="tajagn01" source="api" />
+      </div>
+
 
       {/* Quote & Footer Section */}
       <section className={`w-full min-h-screen flex flex-col items-center justify-center py-20 ${darkMode ? 'bg-black' : 'bg-white'}`}>
@@ -687,251 +686,3 @@ const QuoteBox = ({ darkMode }) => {
   );
 };
 
-// Generate mock GitHub contributions data
-const generateMockContributions = () => {
-  const weeks = [];
-  const today = new Date();
-  const oneYearAgo = new Date(today);
-  oneYearAgo.setFullYear(today.getFullYear() - 1);
-  
-  let currentDate = new Date(oneYearAgo);
-  // Start from the beginning of the week
-  currentDate.setDate(currentDate.getDate() - currentDate.getDay());
-  
-  let totalContributions = 0;
-  
-  while (currentDate <= today) {
-    const week = { contributionDays: [] };
-    
-    for (let i = 0; i < 7; i++) {
-      const isWeekend = currentDate.getDay() === 0 || currentDate.getDay() === 6;
-      const isRecentMonth = currentDate >= new Date(today.getFullYear(), today.getMonth() - 2, 1);
-      
-      // Generate realistic contribution patterns
-      let contributionCount = 0;
-      const random = Math.random();
-      
-      if (currentDate <= today) {
-        if (isWeekend) {
-          // Less activity on weekends
-          contributionCount = random < 0.3 ? Math.floor(Math.random() * 3) : 0;
-        } else {
-          // More activity on weekdays, especially recent months
-          if (isRecentMonth) {
-            contributionCount = random < 0.7 ? Math.floor(Math.random() * 8) + 1 : 0;
-          } else {
-            contributionCount = random < 0.5 ? Math.floor(Math.random() * 5) : 0;
-          }
-        }
-      }
-      
-      totalContributions += contributionCount;
-      
-      // Determine contribution level based on count
-      let contributionLevel = 'NONE';
-      if (contributionCount >= 1 && contributionCount <= 2) contributionLevel = 'FIRST_QUARTILE';
-      else if (contributionCount >= 3 && contributionCount <= 4) contributionLevel = 'SECOND_QUARTILE';
-      else if (contributionCount >= 5 && contributionCount <= 6) contributionLevel = 'THIRD_QUARTILE';
-      else if (contributionCount >= 7) contributionLevel = 'FOURTH_QUARTILE';
-      
-      week.contributionDays.push({
-        contributionCount,
-        date: currentDate.toISOString().split('T')[0],
-        contributionLevel
-      });
-      
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-    
-    weeks.push(week);
-  }
-  
-  return {
-    totalContributions,
-    weeks
-  };
-};
-
-// GitHub Contributions Component
-const GitHubContributions = ({ darkMode }) => {
-  const [contributions, setContributions] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
-  const USERNAME = 'tajagn01';
-
-  useEffect(() => {
-    const fetchContributions = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // Debug: Log token availability (remove this after debugging)
-        console.log('GitHub token available:', !!GITHUB_TOKEN);
-        console.log('Token starts with ghp_:', GITHUB_TOKEN?.startsWith('ghp_'));
-
-        // Check if GitHub token is available
-        if (!GITHUB_TOKEN) {
-          console.log('No GitHub token found, using mock data');
-          // Generate mock data if no token is available
-          const mockContributions = generateMockContributions();
-          setContributions(mockContributions);
-          return;
-        }
-
-        console.log('Fetching real GitHub contributions...');
-
-        // GraphQL query to get contribution data
-        const query = `
-          query($userName: String!) {
-            user(login: $userName) {
-              contributionsCollection {
-                contributionCalendar {
-                  totalContributions
-                  weeks {
-                    contributionDays {
-                      contributionCount
-                      date
-                      contributionLevel
-                    }
-                  }
-                }
-              }
-            }
-          }
-        `;
-
-        const response = await fetch('https://api.github.com/graphql', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${GITHUB_TOKEN}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            query,
-            variables: { userName: USERNAME }
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error(`GitHub API error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        
-        if (data.errors) {
-          throw new Error(data.errors[0].message);
-        }
-
-        setContributions(data.data.user.contributionsCollection.contributionCalendar);
-        console.log('Successfully fetched real GitHub contributions');
-      } catch (err) {
-        console.error('Error fetching GitHub contributions:', err);
-        setError(err.message);
-        // Fallback to mock data on error
-        const mockContributions = generateMockContributions();
-        setContributions(mockContributions);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchContributions();
-  }, []);
-
-  const getContributionColor = (level, darkMode) => {
-    const colors = {
-      NONE: darkMode ? 'bg-gray-800' : 'bg-gray-200',
-      FIRST_QUARTILE: darkMode ? 'bg-green-900' : 'bg-green-200',
-      SECOND_QUARTILE: darkMode ? 'bg-green-700' : 'bg-green-400',
-      THIRD_QUARTILE: darkMode ? 'bg-green-500' : 'bg-green-600',
-      FOURTH_QUARTILE: darkMode ? 'bg-green-400' : 'bg-green-800'
-    };
-    return colors[level] || colors.NONE;
-  };
-
-  if (loading) {
-    return (
-      <div className={`rounded-2xl border p-8 ${darkMode ? 'border-gray-700 bg-gray-900/50' : 'border-gray-200 bg-gray-50/50'}`}>
-        <div className="flex items-center justify-center">
-          <div className={`animate-spin rounded-full h-8 w-8 border-b-2 ${darkMode ? 'border-white' : 'border-black'}`}></div>
-          <span className={`ml-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Loading GitHub contributions...</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={`rounded-2xl border p-8 ${darkMode ? 'border-gray-700 bg-gray-900/50' : 'border-gray-200 bg-gray-50/50'}`}>
-        <div className="text-center">
-          <h3 className={`text-xl font-semibold mb-4 ${darkMode ? 'text-white' : 'text-black'}`}>
-            GitHub Contributions
-          </h3>
-          <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            Unable to load GitHub contributions at this time.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!contributions) return null;
-
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-  return (
-    <div className={`rounded-2xl border p-8 ${darkMode ? 'border-gray-700 bg-gray-900/50' : 'border-gray-200 bg-gray-50/50'}`}>
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between mb-6">
-        <div>
-          <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-black'}`}>
-            GitHub Contributions
-          </h3>
-          <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            {contributions.totalContributions} contributions in the last year
-          </p>
-        </div>
-        <div className="flex items-center gap-2 mt-4 lg:mt-0">
-          <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Less</span>
-          <div className="flex gap-1">
-            {['NONE', 'FIRST_QUARTILE', 'SECOND_QUARTILE', 'THIRD_QUARTILE', 'FOURTH_QUARTILE'].map(level => (
-              <div
-                key={level}
-                className={`w-3 h-3 rounded-sm ${getContributionColor(level, darkMode)}`}
-              />
-            ))}
-          </div>
-          <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>More</span>
-        </div>
-      </div>
-
-      {/* Contribution Grid */}
-      <div className="overflow-x-auto">
-        <div className="flex gap-1 min-w-max">
-          {contributions.weeks.map((week, weekIndex) => (
-            <div key={weekIndex} className="flex flex-col gap-1">
-              {week.contributionDays.map((day, dayIndex) => (
-                <div
-                  key={dayIndex}
-                  className={`w-3 h-3 rounded-sm ${getContributionColor(day.contributionLevel, darkMode)} hover:ring-2 hover:ring-blue-500 transition-all cursor-pointer`}
-                  title={`${day.contributionCount} contributions on ${new Date(day.date).toLocaleDateString()}`}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Month labels */}
-      <div className="flex justify-between mt-2 text-xs text-gray-500 overflow-x-auto min-w-max">
-        {months.map((month, index) => (
-          <span key={index} className="flex-1 text-center">
-            {month}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
