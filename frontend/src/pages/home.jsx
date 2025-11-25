@@ -299,8 +299,11 @@ export default function HomePage() {
 
       {/* Projects */}
       <section id="projects" className='flex flex-col items-center justify-center min-h-screen w-full mt-20'>
-        <div className="w-full max-w-3xl mx-auto px-5 sm:px-10 flex flex-col items-center justify-center h-full">
-          <h2 className={`text-3xl font-bold mb-10 ${darkMode ? "text-white" : "text-black"}`}>Projects</h2>
+        <div className="w-full max-w-3xl mx-auto px-5 sm:px-10 flex flex-col h-full">
+         <div className="mb-6">
+        <div className="text-gray-500 text-sm font-medium mb-1">Featured</div>
+        <h2 className="text-3xl font-bold mb-2">projects</h2>
+        </div>
 
           <div className="relative overflow-visible flex items-center justify-center">
             <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${isMobile ? 'auto-rows-auto' : ''}`}>
@@ -561,14 +564,14 @@ export default function HomePage() {
       </section>
 
       {/* GitHub Contributions Section */}
-      <div className="w-full flex justify-center mt-10 mb-10">
-        <GitHubContribProgress username="tajagn01" source="api" />
+      <div className="w-full w-max-4xl flex justify-center mt-10 mb-10">
+        <GitHubContribProgress username="tajagn01" source="api" darkMode={darkMode} />
       </div>
 
 
       {/* Quote & Footer Section */}
-      <section className={`w-full min-h-screen flex flex-col items-center justify-center py-20 ${darkMode ? 'bg-black' : 'bg-white'}`}>
-        <div className="w-full max-w-4xl mx-auto px-5 sm:px-10 flex-grow flex items-center justify-center">
+      <section className={`items-center justify-center py-10 ${darkMode ? 'bg-black' : 'bg-white'}`}>
+        <div className="flex-grow flex items-center justify-center">
           <QuoteBox darkMode={darkMode} />
         </div>
         
