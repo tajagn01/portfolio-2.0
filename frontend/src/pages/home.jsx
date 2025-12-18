@@ -11,6 +11,8 @@ import searchify from '../assets/searchify.png';
 import secondBrainImg from '../assets/secondBrain.png';
 import velorant from '../assets/velorent.png';
 import GitHubContribProgress from "../components/GitHubContribProgress";
+import ProjectCard from "../components/ProjectCard";
+import ProjectDetailModal from "../components/ProjectDetailModal";
 // Reusable SkillTag component
 const SkillTag = ({ icon, name }) => (
   <div className="flex items-center gap-2 bg-gray-800 dark:bg-gray-200 border border-gray-600 dark:border-gray-400 rounded-lg px-3 py-1.5 text-sm text-gray-200 dark:text-gray-800">
@@ -97,35 +99,7 @@ export default function HomePage() {
     setTimeout(() => setAnimating(false), 900); // match animation duration
   };
 
-  const [hovered, setHovered] = useState(null);
-  const [clickedCard, setClickedCard] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  // Check if device is mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const handleMouseMove = (e, index) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    if (!isMobile) {
-      setHovered(index);
-    }
-  };
-
-  const handleCardClick = (index) => {
-    if (isMobile) {
-      setClickedCard(clickedCard === index ? null : index);
-    }
-  };
+  const [selectedProject, setSelectedProject] = useState(null);
 
   return (
     <div className={`relative min-h-screen flex flex-col items-center p-5 sm:p-10 font-['Inter',_sans-serif] transition-colors duration-500
@@ -160,15 +134,15 @@ export default function HomePage() {
       {/* Header */}
       <header className={`w-full max-w-3xl fixed top-0 z-20 rounded-md backdrop-blur-sm p-3 sm:p-5 flex justify-between items-center transition-colors duration-500
         ${darkMode ? "bg-black/70 text-gray-300" : "bg-white/70 text-gray-700"}`}>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <img src={avatarImg} alt="small avatar" width={40} height={40} className="rounded-sm" />
-          <nav className="hidden sm:flex items-center gap-4">
+          <nav className="flex items-center gap-2 sm:gap-4">
             {[
               { name: "Work", href: "#work" },
               { name: "About", href: "#about" },
               { name: "Projects", href: "#projects" }
             ].map(item => (
-              <a key={item.name} href={item.href} className="relative hover:text-current transition-colors duration-300
+              <a key={item.name} href={item.href} className="text-md sm:text-base relative hover:text-current transition-colors duration-300
                 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] 
                 after:bg-current after:transition-all after:duration-300 hover:after:w-full">
                 {item.name}
@@ -299,269 +273,32 @@ export default function HomePage() {
 
       {/* Projects */}
       <section id="projects" className='flex flex-col items-center justify-center min-h-screen w-full mt-20'>
-        <div className="w-full max-w-3xl mx-auto px-5 sm:px-10 flex flex-col h-full">
-         <div className="mb-6">
-        <div className="text-gray-500 text-sm font-medium mb-1">Featured</div>
-        <h2 className="text-3xl font-bold mb-2">projects</h2>
-        </div>
+        <div className="w-full max-w-4xl mx-auto px-5 sm:px-10 flex flex-col h-full">
+          <div className="mb-6">
+            <div className="text-gray-500 text-sm font-medium mb-1">Featured</div>
+            <h2 className="text-3xl font-bold mb-2">projects</h2>
+          </div>
 
-          <div className="relative overflow-visible flex items-center justify-center">
-            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${isMobile ? 'auto-rows-auto' : ''}`}>
-          {projectsData.map((project, index) => {
-            const isExpanded = isMobile ? clickedCard === index : hovered === index;
-            
-            return (
-            <div
-              key={index}
-              onMouseEnter={() => !isMobile && setHovered(index)}
-              onMouseLeave={() => !isMobile && setHovered(null)}
-              onClick={() => handleCardClick(index)}
-              className={`relative rounded-xl p-4 border cursor-pointer group transition-all duration-300
-                ${isExpanded && isMobile ? 'row-span-2' : ''}
-                ${darkMode 
-                  ? "bg-black border-gray-600 hover:border-gray-500" 
-                  : "bg-white border-gray-200 hover:border-gray-400"
-                }`}
-            >
-              {/* Header */}
-              <div className="flex justify-between items-start mb-3">
-                <h3 className={`text-lg font-semibold ${darkMode ? "text-white" : "text-black"}`}>
-                  {project.name}
-                </h3>
-                <div className={`flex gap-1 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                  <a 
-                    href={project.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={`p-1.5 rounded-md transition-all duration-200 hover:scale-110
-                      ${darkMode ? "hover:bg-gray-800 hover:text-white" : "hover:bg-gray-100 hover:text-black"}`}
-                  >
-                    <FaGithub size={16} />
-                  </a>
-                  <a 
-                    href={project.live} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={`p-1.5 rounded-md transition-all duration-200 hover:scale-110
-                      ${darkMode ? "hover:bg-gray-800 hover:text-white" : "hover:bg-gray-100 hover:text-black"}`}
-                  >
-                    <FaExternalLinkAlt size={14} />
-                  </a>
-                </div>
-              </div>
-
-              {/* Project Image */}
-              <div className="overflow-hidden rounded-lg mb-3 bg-gray-800">
-                <img 
-                  src={project.image} 
-                  alt={project.name} 
-                  className="w-full h-40 object-cover transition-transform duration-300 hover:scale-105"
-                />
-              </div>
-
-              {/* Description */}
-              <p className={`text-xs leading-relaxed mb-4 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-                {project.shortDesc}
-              </p>
-
-              {/* Technologies */}
-              <div className="flex flex-wrap gap-1.5 mb-3">
-                {project.technologies.map((tech, techIndex) => (
-                  <span 
-                    key={techIndex}
-                    className={`px-2 py-0.5 text-xs rounded-md font-medium ${darkMode ? "bg-gray-800 text-gray-300 border border-gray-600" : "bg-gray-100 text-gray-700 border border-gray-300"}`}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              {/* Mobile expanded content or desktop hover card */}
-              {isExpanded && !isMobile && (
-                <motion.div
-                  initial={{ 
-                    opacity: 0, 
-                    x: index % 2 === 0 ? -100 : 100,
-                    scale: 0.9
-                  }}
-                  animate={{ 
-                    opacity: 1, 
-                    x: index % 2 === 0 ? -20 : 20,
-                    scale: 1
-                  }}
-                  exit={{ 
-                    opacity: 0, 
-                    x: index % 2 === 0 ? -100 : 100,
-                    scale: 0.9
-                  }}
-                  transition={{ 
-                    type: "spring", 
-                    damping: 25, 
-                    stiffness: 300,
-                    duration: 0.3 
-                  }}
-                  className={`absolute top-0 w-85 h-auto p-6 rounded-2xl shadow-2xl z-50 border-2 pointer-events-auto ${darkMode ? "bg-black text-white border-gray-600" : "bg-white text-black border-gray-200"}`}
-                  style={{
-                    left: index % 2 === 0 ? '-310px' : 'auto',
-                    right: index % 2 === 1 ? '-310px' : 'auto',
-                  }}
-                >
-                  {/* Header */}
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className={`text-xl font-semibold ${darkMode ? "text-white" : "text-black"}`}>
-                      {project.name}
-                    </h3>
-                    <div className={`flex gap-2 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className={`p-2 rounded-lg transition-all duration-200 hover:scale-110 ${darkMode ? "hover:bg-gray-800 hover:text-white" : "hover:bg-gray-100 hover:text-black"}`}
-                      >
-                        <FaGithub size={18} />
-                      </a>
-                      <a 
-                        href={project.live} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className={`p-2 rounded-lg transition-all duration-200 hover:scale-110 ${darkMode ? "hover:bg-gray-800 hover:text-white" : "hover:bg-gray-100 hover:text-black"}`}
-                      >
-                        <FaExternalLinkAlt size={16} />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Project image */}
-                  <div className="overflow-hidden rounded-lg mb-4">
-                    <img 
-                      src={project.image} 
-                      alt={project.name} 
-                      className="w-full h-40 object-cover"
-                    />
-                  </div>
-
-                  {/* Full description */}
-                  <p className={`text-sm leading-relaxed mb-4 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-                    {project.fullDesc}
-                  </p>
-
-                  {/* Technologies */}
-                  <div className="mb-4">
-                    <h4 className={`text-sm font-semibold mb-2 ${darkMode ? "text-gray-200" : "text-gray-800"}`}>
-                      Technologies
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, techIndex) => (
-                        <span 
-                          key={techIndex}
-                          className={`px-3 py-1 text-xs rounded-full font-medium ${darkMode ? "bg-gray-800 text-gray-300 border border-gray-600" : "bg-gray-100 text-gray-700 border border-gray-300"}`}
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Key Features */}
-                  <div className="mb-6">
-                    <h4 className={`text-sm font-semibold mb-2 ${darkMode ? "text-gray-200" : "text-gray-800"}`}>
-                      Key Features
-                    </h4>
-                    <ul className={`text-xs space-y-1 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                      {project.keyFeatures.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          <span className="w-1 h-1 rounded-full bg-current mt-2 mr-2 flex-shrink-0"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Action buttons */}
-                  <div className="flex gap-3">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105 ${darkMode ? "bg-white text-black hover:bg-gray-100" : "bg-black text-white hover:bg-gray-800"}`}
-                    >
-                      <FaGithub size={14} />
-                      View Code
-                    </a>
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105 border ${darkMode ? "border-gray-600 text-white hover:bg-gray-800" : "border-gray-300 text-black hover:bg-gray-100"}`}
-                    >
-                      <FaExternalLinkAlt size={12} />
-                      View Demo
-                    </a>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Mobile expanded content within card */}
-              {isExpanded && isMobile && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-4 border-t pt-4 border-gray-600"
-                >
-                  {/* Full description */}
-                  <p className={`text-sm leading-relaxed mb-4 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-                    {project.fullDesc}
-                  </p>
-
-                  {/* Key Features */}
-                  <div className="mb-4">
-                    <h4 className={`text-sm font-semibold mb-2 ${darkMode ? "text-gray-200" : "text-gray-800"}`}>
-                      Key Features
-                    </h4>
-                    <ul className={`text-xs space-y-1 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                      {project.keyFeatures.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          <span className="w-1 h-1 rounded-full bg-current mt-2 mr-2 flex-shrink-0"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Action buttons */}
-                  <div className="flex gap-3">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200
-                        ${darkMode ? "bg-white text-black hover:bg-gray-100" : "bg-black text-white hover:bg-gray-800"}`}
-                    >
-                      <FaGithub size={14} />
-                      View Code
-                    </a>
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 border
-                        ${darkMode ? "border-gray-600 text-white hover:bg-gray-800" : "border-gray-300 text-black hover:bg-gray-100"}`}
-                    >
-                      <FaExternalLinkAlt size={12} />
-                      View Demo
-                    </a>
-                  </div>
-                </motion.div>
-              )}
-            </div>
-          );
-          })}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projectsData.map((project, index) => (
+              <ProjectCard 
+                key={index}
+                project={project}
+                darkMode={darkMode}
+                onViewDetails={() => setSelectedProject(project)}
+              />
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Project Detail Modal */}
+      <ProjectDetailModal 
+        isOpen={!!selectedProject}
+        project={selectedProject}
+        darkMode={darkMode}
+        onClose={() => setSelectedProject(null)}
+      />
 
       {/* GitHub Contributions Section */}
       <div className="w-full w-max-4xl flex justify-center mt-10 mb-10">
