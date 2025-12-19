@@ -41,11 +41,12 @@ const ProjectDetailModal = ({ project, isOpen, onClose, darkMode }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[90vw] max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl border shadow-2xl
+            className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[90vw] max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl border shadow-2xl scrollbar-none
               ${darkMode 
                 ? 'bg-gray-900 border-gray-700 text-white' 
                 : 'bg-white border-gray-200 text-gray-900'
               }`}
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {/* Close Button */}
             <button

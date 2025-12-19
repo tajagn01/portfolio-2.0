@@ -25,7 +25,7 @@ const ProjectCard = ({ project, darkMode, onViewDetails }) => {
 
   return (
     <div 
-      className={`group h-full w-full overflow-hidden rounded-xl border transition-all duration-300 flex flex-col
+      className={`group h-full w-full overflow-hidden rounded-xl border transition-all duration-300 flex flex-col 
         ${darkMode 
           ? 'bg-gray-900/50 border-gray-800 hover:border-gray-700' 
           : 'bg-white border-gray-200 hover:border-gray-300'
@@ -54,7 +54,7 @@ const ProjectCard = ({ project, darkMode, onViewDetails }) => {
       </div>
 
       {/* Card Content */}
-      <div className="px-5 py-4 flex-1 flex flex-col">
+      <div className="px-5 py-4 flex-1 flex flex-col overflow-hidden">
         {/* Title and Links Row */}
         <div className="flex items-center justify-between gap-4 mb-3">
           <h3 
