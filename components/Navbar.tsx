@@ -5,15 +5,16 @@ import { usePathname } from "next/navigation";
 import { Search, Moon, Sun, Home, Github, Linkedin, Twitter, FileText } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
+import { CommandMenu } from "./CommandMenu";
 
 const navItems = [
     { name: "Work", href: "/work" },
-    { name: "Blogs", href: "/blogs" },
     { name: "Projects", href: "/projects" },
 ];
 
 export default function Navbar() {
     const pathname = usePathname();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isDark, setIsDark] = useState(true);
     const navRef = useRef<HTMLDivElement>(null);
@@ -63,11 +64,12 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Effect for handling K keypress to trigger search button click
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
-                searchButtonRef.current?.click();
+                setIsMenuOpen(true);
             }
         };
 
@@ -90,6 +92,7 @@ export default function Navbar() {
 
     return (
         <>
+            <CommandMenu open={isMenuOpen} setOpen={setIsMenuOpen} />
             {/* Desktop Navbar */}
             <div className="hidden md:block sticky top-0 z-50 mb-16 px-4 lg:px-8 pt-2">
                 <div
@@ -128,7 +131,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-2">
                         <button
                             ref={searchButtonRef}
-                            onClick={() => alert('Search functionality coming soon!')}
+                            onClick={() => setIsMenuOpen(true)}
                             className="flex items-center gap-2 px-3 py-1.5 text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all rounded-md hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50"
                         >
                             <Search className="h-3.5 w-3.5" />
@@ -149,18 +152,18 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Bottom Navigation */}
-            <div className="md:hidden fixed bottom-4 left-4 right-4 z-50">
+            <div className="md:hidden fixed bottom-4 left-4 right-4 z-[100]">
                 <div className="flex items-center justify-around bg-zinc-900/90 backdrop-blur-md rounded-2xl px-6 py-3 shadow-lg ring-1 ring-zinc-800">
                     <Link href="/" className="text-zinc-400 hover:text-white transition-colors">
                         <Home className="h-6 w-6" />
                     </Link>
-                    <a href="https://github.com/ramxcodes" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+                    <a href="https://github.com/tajagn01" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
                         <Github className="h-6 w-6" />
                     </a>
-                    <a href="https://www.linkedin.com/in/ramxcodes/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+                    <a href="https://www.linkedin.com/in/tajagn-garala-06ba45265/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
                         <Linkedin className="h-6 w-6" />
                     </a>
-                    <a href="https://x.com/ramxcodes" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
+                    <a href="https://x.com/Garala_Tajagn" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
                         <Twitter className="h-6 w-6" />
                     </a>
                     <Link href="/resume" className="text-zinc-400 hover:text-white transition-colors">

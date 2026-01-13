@@ -1,10 +1,18 @@
+"use client";
+
 import Container from "@/components/ui/Container";
+import Link from "next/link";
+import Image from "next/image";
 import DailyQuote from "@/components/DailyQuote";
 import GitHubActivity from "@/components/GitHubActivity";
 import StatusIndicator from "@/components/StatusIndicator";
-import { FileText, Send, Twitter, Linkedin, Github, Briefcase, Music, Heart, StickyNote, Plug, Code2, Package, Database, Box, AtSign } from "lucide-react";
+import { FileText, Send, Twitter, Linkedin, Github, Briefcase, Code2, Package, Database, Box, AtSign, User, ArrowRight, ExternalLink } from "lucide-react";
+import { SiReact, SiBun, SiJavascript, SiTypescript, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPrisma, SiTailwindcss, SiFigma, SiVercel, SiAmazon, SiPostman } from "react-icons/si";
+import { projects } from "@/lib/data";
+import TechIcon from "@/components/TechIcon";
 
 export default function Home() {
+
     return (
         <Container>
             <div className="space-y-24">
@@ -33,7 +41,7 @@ export default function Home() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors"
                             >
-                                <span className="text-blue-600 dark:text-blue-400">TS</span>
+                                <SiTypescript className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                                 Typescript
                             </a>
                             <span>,</span>
@@ -43,7 +51,7 @@ export default function Home() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors"
                             >
-                                <span className="text-cyan-500">⚛️</span>
+                                <SiReact className="h-3.5 w-3.5 text-cyan-500" />
                                 React
                             </a>
                             <span>,</span>
@@ -53,7 +61,7 @@ export default function Home() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors"
                             >
-                                <span>N</span>
+                                <SiNextdotjs className="h-3.5 w-3.5 text-black dark:text-white" />
                                 Next.js
                             </a>
                             <span>,</span>
@@ -63,7 +71,7 @@ export default function Home() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors"
                             >
-                                <span>🥟</span>
+                                <SiBun className="h-3.5 w-3.5 text-black dark:text-white" />
                                 Bun
                             </a>
                             <span>and</span>
@@ -73,7 +81,7 @@ export default function Home() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors"
                             >
-                                <span className="text-blue-700 dark:text-blue-400">🐘</span>
+                                <SiPostgresql className="h-3.5 w-3.5 text-blue-700 dark:text-blue-400" />
                                 PostgreSQL
                             </a>
                             <span>. With a focus on <span className="font-semibold text-zinc-900 dark:text-white">UI</span> design. Enthusiastic about <span className="font-semibold text-zinc-900 dark:text-white">Three.js</span>, driven by a keen eye for design.</span>
@@ -143,39 +151,39 @@ export default function Home() {
                                 <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-300 mb-3">Technologies & Tools</h4>
                                 <div className="flex flex-wrap gap-2">
                                     <a href="https://nextjs.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                        <span>N</span>
+                                        <SiNextdotjs className="h-3.5 w-3.5 text-black dark:text-white" />
                                         Next.js
                                     </a>
                                     <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                        <span className="text-cyan-600 dark:text-cyan-400">~</span>
+                                        <SiTailwindcss className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
                                         Tailwind CSS
                                     </a>
                                     <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                        <span className="text-blue-600 dark:text-blue-400">TS</span>
+                                        <SiTypescript className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                                         TypeScript
                                     </a>
                                     <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                        <span className="text-cyan-500">⚛️</span>
+                                        <SiReact className="h-3.5 w-3.5 text-cyan-500" />
                                         React
                                     </a>
                                     <a href="https://www.figma.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                        <span>F</span>
+                                        <SiFigma className="h-3.5 w-3.5 text-purple-500" />
                                         Figma
                                     </a>
                                     <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                        <span>▲</span>
+                                        <SiVercel className="h-3.5 w-3.5 text-black dark:text-white" />
                                         Vercel
                                     </a>
                                     <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                        <span className="text-orange-500">☁</span>
+                                        <SiAmazon className="h-3.5 w-3.5 text-orange-500" />
                                         AWS
                                     </a>
                                     <a href="https://www.postman.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                        <span className="text-orange-600">P</span>
+                                        <SiPostman className="h-3.5 w-3.5 text-orange-600" />
                                         Postman
                                     </a>
                                     <a href="https://bun.sh/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                        <span>🥟</span>
+                                        <SiBun className="h-3.5 w-3.5 text-black dark:text-white" />
                                         Bun
                                     </a>
                                 </div>
@@ -215,148 +223,68 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Project Card 1 */}
-                        <div className="group relative bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
-                            <div className="relative aspect-video overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                                <div className="absolute inset-0 flex items-center justify-center text-zinc-400 dark:text-zinc-600">
-                                    <StickyNote className="h-16 w-16" />
+                        {projects.slice(0, 4).map((project, i) => (
+                            <div key={i} className="group relative bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
+                                <div className="relative aspect-video overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
                                 </div>
-                            </div>
-                            <div className="p-6 space-y-4">
-                                <div className="flex items-start justify-between gap-4">
-                                    <h3 className="text-xl font-semibold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
-                                        NotesBuddy
-                                    </h3>
-                                    <div className="flex items-center gap-1 rounded-md px-2 py-1 text-xs border-green-300 bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-500">
-                                        <div className="size-2 rounded-full bg-green-500 animate-pulse"></div>
-                                        Live
+                                <div className="p-6 space-y-4">
+                                    <div className="flex items-start justify-between gap-4">
+                                        <h3 className="text-xl font-semibold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
+                                            {project.title}
+                                        </h3>
+                                        <div className={`flex items-center gap-1 rounded-md px-2 py-1 text-xs ${project.isBuilding ? "border-red-300 bg-red-100 dark:bg-red-500/10 text-red-500" : "border-green-300 bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-500"}`}>
+                                            <div className={`size-2 rounded-full ${project.isBuilding ? "bg-red-500" : "bg-green-500"} animate-pulse`}></div>
+                                            {project.status}
+                                        </div>
                                     </div>
-                                </div>
-                                <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2">
-                                    A comprehensive study platform with notes, flashcards, quizzes, AI chatbot, and interactive learning tools
-                                </p>
-                                <div>
-                                    <h4 className="text-xs font-medium text-zinc-500 mb-2">Technologies</h4>
-                                    <div className="flex flex-wrap gap-2">
-                                        {["Next.js", "TypeScript", "React", "Vercel"].map(tech => (
-                                            <span key={tech} className="inline-flex items-center rounded-md bg-zinc-100 dark:bg-zinc-800/80 px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50">
-                                                {tech}
-                                            </span>
-                                        ))}
+                                    <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                                        {project.desc}
+                                    </p>
+                                    <div>
+                                        <h4 className="text-xs font-medium text-zinc-500 mb-2">Technologies</h4>
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.tags.map(tech => (
+                                                <TechIcon key={tech} name={tech} />
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Project Card 2 */}
-                        <div className="group relative bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
-                            <div className="relative aspect-video overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                                <div className="absolute inset-0 flex items-center justify-center text-zinc-400 dark:text-zinc-600">
-                                    <Plug className="h-16 w-16" />
-                                </div>
-                            </div>
-                            <div className="p-6 space-y-4">
-                                <div className="flex items-start justify-between gap-4">
-                                    <h3 className="text-xl font-semibold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
-                                        Appwrite MCP Server
-                                    </h3>
-                                    <div className="flex items-center gap-1 rounded-md px-2 py-1 text-xs border-green-300 bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-500">
-                                        <div className="size-2 rounded-full bg-green-500 animate-pulse"></div>
-                                        Live
-                                    </div>
-                                </div>
-                                <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2">
-                                    Model Context Protocol server for seamless Appwrite database operations with 7 powerful tools
-                                </p>
-                                <div>
-                                    <h4 className="text-xs font-medium text-zinc-500 mb-2">Technologies</h4>
-                                    <div className="flex flex-wrap gap-2">
-                                        {["TypeScript", "Bun", "Vercel", "Appwrite"].map(tech => (
-                                            <span key={tech} className="inline-flex items-center rounded-md bg-zinc-100 dark:bg-zinc-800/80 px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50">
-                                                {tech}
-                                            </span>
-                                        ))}
+                                    <div className="flex items-center justify-between pt-4 mt-2 border-t border-zinc-100 dark:border-zinc-800/50">
+                                        <Link
+                                            href={`/projects/${project.slug}`}
+                                            className="flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-white hover:underline group/btn"
+                                        >
+                                            View more <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-0.5 transition-transform" />
+                                        </Link>
+                                        <div className="flex gap-3">
+                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors" title="View Source">
+                                                <Github className="h-5 w-5" />
+                                            </a>
+                                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors" title="Live Demo">
+                                                <ExternalLink className="h-5 w-5" />
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Project Card 3 */}
-                        <div className="group relative bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
-                            <div className="relative aspect-video overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                                <div className="absolute inset-0 flex items-center justify-center text-zinc-400 dark:text-zinc-600">
-                                    <Music className="h-16 w-16" />
-                                </div>
-                            </div>
-                            <div className="p-6 space-y-4">
-                                <div className="flex items-start justify-between gap-4">
-                                    <h3 className="text-xl font-semibold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
-                                        Syncify
-                                    </h3>
-                                    <div className="flex items-center gap-1 rounded-md px-2 py-1 text-xs border-green-300 bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-500">
-                                        <div className="size-2 rounded-full bg-green-500 animate-pulse"></div>
-                                        Live
-                                    </div>
-                                </div>
-                                <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2">
-                                    Real-time music streaming platform with synchronized playback, live chat, and social listening features
-                                </p>
-                                <div>
-                                    <h4 className="text-xs font-medium text-zinc-500 mb-2">Technologies</h4>
-                                    <div className="flex flex-wrap gap-2">
-                                        {["React", "Node.js", "Tailwind CSS", "Socket.io"].map(tech => (
-                                            <span key={tech} className="inline-flex items-center rounded-md bg-zinc-100 dark:bg-zinc-800/80 px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50">
-                                                {tech}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Project Card 4 */}
-                        <div className="group relative bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
-                            <div className="relative aspect-video overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                                <div className="absolute inset-0 flex items-center justify-center text-zinc-400 dark:text-zinc-600">
-                                    <Heart className="h-16 w-16" />
-                                </div>
-                            </div>
-                            <div className="p-6 space-y-4">
-                                <div className="flex items-start justify-between gap-4">
-                                    <h3 className="text-xl font-semibold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
-                                        Pasandida Aurat
-                                    </h3>
-                                    <div className="flex items-center gap-1 rounded-md px-2 py-1 text-xs border-red-300 bg-red-100 dark:bg-red-500/10 text-red-500">
-                                        <div className="size-2 rounded-full bg-red-500 animate-pulse"></div>
-                                        Building
-                                    </div>
-                                </div>
-                                <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2">
-                                    Innovative dating platform featuring anonymous questions and authentic connections - currently in development
-                                </p>
-                                <div>
-                                    <h4 className="text-xs font-medium text-zinc-500 mb-2">Technologies</h4>
-                                    <div className="flex flex-wrap gap-2">
-                                        {["Next.js", "TypeScript", "Supabase", "Tailwind CSS"].map(tech => (
-                                            <span key={tech} className="inline-flex items-center rounded-md bg-zinc-100 dark:bg-zinc-800/80 px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50">
-                                                {tech}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
 
                     <div className="mt-8 flex justify-center">
-                        <button className="inline-flex items-center gap-2 rounded-md bg-zinc-800/80 dark:bg-zinc-800/80 px-4 py-2 text-sm font-medium text-zinc-100 dark:text-zinc-300 transition-colors hover:bg-zinc-700 dark:hover:bg-zinc-800 hover:text-white ring-1 ring-zinc-700/50">
+                        <Link href="/projects" className="inline-flex items-center gap-2 rounded-md bg-zinc-800/80 dark:bg-zinc-800/80 px-4 py-2 text-sm font-medium text-zinc-100 dark:text-zinc-300 transition-colors hover:bg-zinc-700 dark:hover:bg-zinc-800 hover:text-white ring-1 ring-zinc-700/50">
                             Show all projects
-                        </button>
+                        </Link>
                     </div>
                 </section>
 
                 {/* About Me Section */}
-                <section>
+                <section id="about">
                     <div className="mb-8">
                         <p className="text-sm text-zinc-500 mb-1">About</p>
                         <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">Me</h2>
@@ -376,29 +304,29 @@ export default function Home() {
                             <div>
                                 <p className="text-sm font-bold text-zinc-500 dark:text-zinc-400 mb-4">Skills</p>
                                 <div className="flex flex-wrap gap-3">
-                                    <div className="h-8 w-8 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer text-cyan-500" title="React">
-                                        <Code2 className="h-6 w-6" />
+                                    <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="React">
+                                        <SiReact className="h-5 w-5 text-[#61DAFB] group-hover:drop-shadow-[0_0_8px_rgba(97,218,251,0.5)] transition-all" />
                                     </div>
-                                    <div className="h-8 w-8 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer text-orange-500" title="Bun">
-                                        <Box className="h-6 w-6" />
+                                    <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="Bun">
+                                        <SiBun className="h-5 w-5 text-black dark:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all" />
                                     </div>
-                                    <div className="h-8 w-8 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer bg-yellow-400 rounded" title="JavaScript">
-                                        <span className="text-sm font-bold">JS</span>
+                                    <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="JavaScript">
+                                        <SiJavascript className="h-5 w-5 text-[#F7DF1E] group-hover:drop-shadow-[0_0_8px_rgba(247,223,30,0.5)] transition-all" />
                                     </div>
-                                    <div className="h-8 w-8 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer bg-blue-600 rounded" title="TypeScript">
-                                        <span className="text-sm font-bold text-white">TS</span>
+                                    <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="TypeScript">
+                                        <SiTypescript className="h-5 w-5 text-[#3178C6] group-hover:drop-shadow-[0_0_8px_rgba(49,120,198,0.5)] transition-all" />
                                     </div>
-                                    <div className="h-8 w-8 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer bg-black rounded" title="Next.js">
-                                        <span className="text-sm font-bold text-white">N</span>
+                                    <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="Next.js">
+                                        <SiNextdotjs className="h-5 w-5 text-black dark:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all" />
                                     </div>
-                                    <div className="h-8 w-8 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer text-green-600" title="Node.js">
-                                        <Package className="h-6 w-6" />
+                                    <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="Node.js">
+                                        <SiNodedotjs className="h-5 w-5 text-[#339933] group-hover:drop-shadow-[0_0_8px_rgba(51,153,51,0.5)] transition-all" />
                                     </div>
-                                    <div className="h-8 w-8 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer text-blue-600" title="PostgreSQL">
-                                        <Database className="h-6 w-6" />
+                                    <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="PostgreSQL">
+                                        <SiPostgresql className="h-5 w-5 text-[#4169E1] group-hover:drop-shadow-[0_0_8px_rgba(65,105,225,0.5)] transition-all" />
                                     </div>
-                                    <div className="h-8 w-8 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer bg-gray-800 rounded" title="Prisma">
-                                        <span className="text-sm font-bold text-white">P</span>
+                                    <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="Prisma">
+                                        <SiPrisma className="h-5 w-5 text-[#2D3748] dark:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all" />
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +335,7 @@ export default function Home() {
                 </section>
 
                 {/* CTA Section */}
-                <div className="border border-zinc-200 dark:border-zinc-800 py-8 rounded-md bg-white dark:bg-transparent shadow-sm dark:shadow-none">
+                <div id="contact" className="border border-zinc-200 dark:border-zinc-800 py-8 rounded-md bg-white dark:bg-transparent shadow-sm dark:shadow-none">
                     <div className="px-6 sm:px-12 flex flex-col items-center">
                         <p className="opacity-50 text-base md:text-xl mb-6 text-center text-zinc-900 dark:text-white">
                             Hey, you scrolled this far, let's talk.

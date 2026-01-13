@@ -10,30 +10,30 @@ export default function StatusIndicator() {
     useEffect(() => {
         const fetchStatus = async () => {
             try {
-                // Fetch from our local file-watcher API
+                // Fetch from our local API which proxies WakaTime
                 const response = await fetch('/api/status');
-                if (!response.ok) throw new Error('Failed to fetch');
+                if (!response.ok) throw new Error('Failed to fetch status');
 
                 const data = await response.json();
-                const lastActiveTime = new Date(data.lastActive).getTime();
-                const currentTime = new Date().getTime();
-                const diffMinutes = (currentTime - lastActiveTime) / (1000 * 60);
 
-                // Consider "coding now" if files were changed in last 10 minutes
-                if (diffMinutes < 10) {
+                if (data.isOnline) {
                     setStatus('coding');
-                    setLastActive('Coding now (VS Code)');
+                    setLastActive(data.source === 'wakatime' ? 'Coding now (VS Code)' : 'Coding now (GitHub)');
                 } else {
                     setStatus('offline');
+                    const lastActiveTime = new Date(data.lastActive).getTime();
+                    const currentTime = new Date().getTime();
+                    const diffMinutes = (currentTime - lastActiveTime) / (1000 * 60);
+
                     if (diffMinutes < 60) {
                         const minutes = Math.floor(diffMinutes);
-                        setLastActive(`Edited files ${minutes}m ago`);
+                        setLastActive(`Coded ${minutes}m ago`);
                     } else if (diffMinutes < 60 * 24) {
                         const hours = Math.floor(diffMinutes / 60);
-                        setLastActive(`Edited files ${hours}h ago`);
+                        setLastActive(`Coded ${hours}h ago`);
                     } else {
                         const days = Math.floor(diffMinutes / (60 * 24));
-                        setLastActive(`Edited files ${days}d ago`);
+                        setLastActive(`Coded ${days}d ago`);
                     }
                 }
             } catch (error) {
@@ -46,8 +46,8 @@ export default function StatusIndicator() {
         };
 
         fetchStatus();
-        // Poll every 10 seconds for real-time updates
-        const interval = setInterval(fetchStatus, 10 * 1000);
+        // Poll every 1 minute
+        const interval = setInterval(fetchStatus, 60 * 1000);
         return () => clearInterval(interval);
     }, []);
 
@@ -67,9 +67,9 @@ export default function StatusIndicator() {
             </span>
 
             {/* Tooltip */}
-            <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-zinc-900 dark:bg-zinc-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            <span className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 text-xs font-medium text-white bg-zinc-900 dark:bg-zinc-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                 {lastActive}
-                <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-zinc-900 dark:border-t-zinc-700"></span>
+                <span className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-zinc-900 dark:border-r-zinc-700"></span>
             </span>
         </span>
     );
