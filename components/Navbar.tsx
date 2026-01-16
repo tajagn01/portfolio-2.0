@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Moon, Sun, Home, Github, Linkedin, Twitter, FileText } from "lucide-react";
+import { Search, Moon, Sun, Home, Github, Linkedin, Twitter, FileText, Briefcase, Code2 } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { CommandMenu } from "./CommandMenu";
@@ -154,20 +154,17 @@ export default function Navbar() {
             {/* Mobile Bottom Navigation */}
             <div className="md:hidden fixed bottom-4 left-4 right-4 z-[100]">
                 <div className="flex items-center justify-around bg-zinc-900/90 backdrop-blur-md rounded-2xl px-6 py-3 shadow-lg ring-1 ring-zinc-800">
-                    <Link href="/" className="text-zinc-400 hover:text-white transition-colors">
+                    <Link href="/" className={`transition-colors ${pathname === "/" ? "text-white" : "text-zinc-400 hover:text-white"}`}>
                         <Home className="h-6 w-6" />
+                        <span className="sr-only">Home</span>
                     </Link>
-                    <a href="https://github.com/tajagn01" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
-                        <Github className="h-6 w-6" />
-                    </a>
-                    <a href="https://www.linkedin.com/in/tajagn-garala-06ba45265/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
-                        <Linkedin className="h-6 w-6" />
-                    </a>
-                    <a href="https://x.com/Garala_Tajagn" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">
-                        <Twitter className="h-6 w-6" />
-                    </a>
-                    <Link href="/resume" className="text-zinc-400 hover:text-white transition-colors">
-                        <FileText className="h-6 w-6" />
+                    <Link href="/work" className={`transition-colors ${pathname === "/work" ? "text-white" : "text-zinc-400 hover:text-white"}`}>
+                        <Briefcase className="h-6 w-6" />
+                        <span className="sr-only">Work</span>
+                    </Link>
+                    <Link href="/projects" className={`transition-colors ${pathname === "/projects" ? "text-white" : "text-zinc-400 hover:text-white"}`}>
+                        <Code2 className="h-6 w-6" />
+                        <span className="sr-only">Projects</span>
                     </Link>
                 </div>
             </div>
