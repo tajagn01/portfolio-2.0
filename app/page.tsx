@@ -89,14 +89,22 @@ export default function Home() {
                             </div>
 
                             <div className="flex flex-wrap gap-4 pt-2">
-                                <button className="inline-flex items-center gap-2 rounded-md bg-zinc-800/80 dark:bg-zinc-800/80 px-4 py-2 text-sm font-medium text-white dark:text-zinc-300 transition-colors hover:bg-zinc-700 dark:hover:bg-zinc-800 hover:text-white ring-1 ring-zinc-700/50">
+                                <a
+                                    href="/projects/Garala Tajagn  (1).pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 rounded-md bg-zinc-800/80 dark:bg-zinc-800/80 px-4 py-2 text-sm font-medium text-white dark:text-zinc-300 transition-colors hover:bg-zinc-700 dark:hover:bg-zinc-800 hover:text-white ring-1 ring-zinc-700/50"
+                                >
                                     <FileText className="h-4 w-4" />
                                     Resume / CV
-                                </button>
-                                <button className="inline-flex items-center gap-2 rounded-md bg-zinc-100 dark:bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-white">
+                                </a>
+                                <a
+                                    href="mailto:trgarala@gmail.com"
+                                    className="inline-flex items-center gap-2 rounded-md bg-zinc-100 dark:bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-white"
+                                >
                                     <Send className="h-4 w-4" />
                                     Get in touch
-                                </button>
+                                </a>
                             </div>
 
                             <div className="flex gap-2 pt-4">
