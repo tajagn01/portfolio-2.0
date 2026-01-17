@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google"; // Changed to JetBrains_Mono
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+// Configured JetBrains Mono
+const jetbrainsMono = JetBrains_Mono({
+    variable: "--font-jetbrains-mono",
     subsets: ["latin"],
 });
 
@@ -45,7 +41,7 @@ export default function RootLayout({
                 />
             </head>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-zinc-900 dark:bg-black dark:text-zinc-100 transition-colors duration-500`}
+                className={`${jetbrainsMono.variable} antialiased bg-white text-zinc-900 dark:bg-black dark:text-zinc-100 transition-colors duration-500 font-mono`} // Added font-mono to apply it directly
                 suppressHydrationWarning
             >
                 <div className="min-h-screen py-8">

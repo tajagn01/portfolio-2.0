@@ -9,6 +9,10 @@ const config: Config = {
     darkMode: "selector",
     theme: {
         extend: {
+            fontFamily: {
+                sans: ["var(--font-jetbrains-mono)", "monospace"], // Override sans to use JetBrains Mono
+                mono: ["var(--font-jetbrains-mono)", "monospace"],
+            },
             colors: {
                 background: "var(--background)",
                 foreground: "var(--foreground)",

@@ -1,3 +1,5 @@
+import { head } from "framer-motion/client";
+
 export interface Project {
     title: string;
     slug: string;

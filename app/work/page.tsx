@@ -11,7 +11,7 @@ export default function Work() {
                     Back
                 </Link>
                 <div className="space-y-24">
-                    {/* Experience Section */}
+                   {/* experience */}
                     <section>
                         <div className="mb-8">
                             <p className="text-sm text-zinc-500 mb-1">Featured</p>
