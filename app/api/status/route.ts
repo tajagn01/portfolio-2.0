@@ -35,7 +35,7 @@ export async function GET() {
                     if (latestHeartbeat && latestHeartbeat.time) {
                         wakaTimeData = {
                             lastActive: heartbeatTime,
-                            isOnline: timeDiffMins < 3 // < 3 mins (2 mins might be too aggressive if heartbeat is slightly delayed)
+                            isOnline: timeDiffMins < 15 // Active if coded within last 15 minutes
                         };
                     }
                 }

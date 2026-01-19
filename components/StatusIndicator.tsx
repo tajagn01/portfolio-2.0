@@ -18,7 +18,11 @@ export default function StatusIndicator() {
 
                 if (data.isOnline) {
                     setStatus('coding');
-                    setLastActive(data.source === 'wakatime' ? 'Coding now (VS Code)' : 'Coding now (GitHub)');
+                    if (data.source === 'wakatime') {
+                        setLastActive('Coding now in VS Code');
+                    } else {
+                        setLastActive('coding now in vs code');
+                    }
                 } else {
                     setStatus('offline');
                     const lastActiveTime = new Date(data.lastActive).getTime();
