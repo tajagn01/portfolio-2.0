@@ -3,8 +3,9 @@
 import Container from "@/components/ui/Container";
 import Link from "next/link";
 import Image from "next/image";
-import DailyQuote from "@/components/DailyQuote";
-import GitHubActivity from "@/components/GitHubActivity";
+import LazyGitHubActivity from "@/components/LazyGitHubActivity";
+import LazyDailyQuote from "@/components/LazyDailyQuote";
+import LazyCalEmbed from "@/components/LazyCalEmbed";
 import StatusIndicator from "@/components/StatusIndicator";
 import { FileText, Send, Twitter, Linkedin, Github, Briefcase, Code2, Package, Database, Box, AtSign, User, ArrowRight, ExternalLink } from "lucide-react";
 import { SiReact, SiBun, SiJavascript, SiTypescript, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPrisma, SiTailwindcss, SiFigma, SiVercel, SiAmazon, SiPostman } from "react-icons/si";
@@ -12,16 +13,7 @@ import { projects } from "@/lib/data";
 import TechIcon from "@/components/TechIcon";
 import FadeIn from "@/components/FadeIn";
 
-import { getCalApi } from "@calcom/embed-react";
-import { useEffect } from "react";
-
 export default function Home() {
-    useEffect(() => {
-        (async function () {
-            const cal = await getCalApi({ namespace: "30min" });
-            cal("ui", { "styles": { "branding": { "brandColor": "#000000" } }, "hideEventTypeDetails": false, "layout": "month_view" });
-        })();
-    }, []);
 
     return (
         <Container>
@@ -31,7 +23,7 @@ export default function Home() {
                     <section className="space-y-8 mt-8">
                         <div className="relative h-24 w-24">
                             <div className="h-24 w-24 overflow-hidden rounded-full">
-                                <img src="/logo.jpg" alt="Values" className="h-full w-full object-cover" />
+                                <Image src="/logo.jpg" alt="Tajagn Garala Profile" width={96} height={96} className="h-full w-full object-cover" priority />
                             </div>
                             <StatusIndicator />
                         </div>
@@ -108,16 +100,16 @@ export default function Home() {
                             </div>
 
                             <div className="flex gap-2 pt-4">
-                                <a href="https://x.com/Garala_Tajagn" target="_blank" rel="noopener noreferrer" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">
+                                <a href="https://x.com/Garala_Tajagn" target="_blank" rel="noopener noreferrer" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors" aria-label="Twitter Profile">
                                     <Twitter className="h-6 w-6" />
                                 </a>
-                                <a href="https://www.linkedin.com/in/tajagn-garala-06ba45265/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">
+                                <a href="https://www.linkedin.com/in/tajagn-garala-06ba45265/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors" aria-label="LinkedIn Profile">
                                     <Linkedin className="h-6 w-6" />
                                 </a>
-                                <a href="https://github.com/tajagn01" target="_blank" rel="noopener noreferrer" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">
+                                <a href="https://github.com/tajagn01" target="_blank" rel="noopener noreferrer" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors" aria-label="GitHub Profile">
                                     <Github className="h-6 w-6" />
                                 </a>
-                                <a href="mailto:trgarala@gmail.com" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">
+                                <a href="mailto:trgarala@gmail.com" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors" aria-label="Email Contact">
                                     <AtSign className="h-6 w-6" />
                                 </a>
                             </div>
@@ -226,7 +218,7 @@ export default function Home() {
 
                 {/* GitHub Activity Section */}
                 <FadeIn delay={0.3}>
-                    <GitHubActivity />
+                    <LazyGitHubActivity />
                 </FadeIn>
 
                 {/* Projects Section */}
@@ -278,10 +270,10 @@ export default function Home() {
                                                 View more <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-0.5 transition-transform" />
                                             </Link>
                                             <div className="flex gap-3">
-                                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors" title="View Source">
+                                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors" aria-label={`View ${project.title} source code on GitHub`}>
                                                     <Github className="h-5 w-5" />
                                                 </a>
-                                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors" title="Live Demo">
+                                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors" aria-label={`View ${project.title} live demo`}>
                                                     <ExternalLink className="h-5 w-5" />
                                                 </a>
                                             </div>
@@ -309,7 +301,7 @@ export default function Home() {
 
                         <div className="flex flex-col md:flex-row gap-8">
                             <div className="h-60 w-60 rounded-md overflow-hidden flex-shrink-0">
-                                <img src="/logo.jpg" alt="About" className="h-full w-full object-contain" />
+                                <Image src="/logo.jpg" alt="Tajagn Garala" width={240} height={240} className="h-full w-full object-contain" />
                             </div>
 
                             <div className="flex-1 space-y-6">
@@ -359,46 +351,14 @@ export default function Home() {
                             <p className="opacity-50 text-base md:text-xl mb-6 text-center text-zinc-900 dark:text-white">
                                 Hey, you scrolled this far, let's talk.
                             </p>
-                            <div
-                                data-cal-namespace="30min"
-                                data-cal-link="tajagn-garala-tlbd4j/30min"
-                                data-cal-config='{"layout":"month_view"}'
-                                className="group inline-flex items-center text-sm bg-black/5 dark:bg-white/15 border border-zinc-200 dark:border-zinc-800 py-2 px-3 rounded-md cursor-pointer transition-all hover:bg-black/10 dark:hover:bg-white/20"
-                            >
-                                <div className="flex items-center gap-2 group-hover:gap-8 transition-all duration-300 relative">
-                                    {/* Profile Image */}
-                                    <div className="w-5 h-5 flex-shrink-0">
-                                        <img
-                                            src="/logo.jpg"
-                                            alt="Profile"
-                                            className="w-full h-full object-contain rounded-sm"
-                                        />
-                                    </div>
-
-                                    {/* Animated Plus and "You" badge */}
-                                    <div className="flex items-center gap-1 absolute left-6 opacity-0 group-hover:opacity-100 transition-all duration-300 text-zinc-900 dark:text-white">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M5 12h14"></path>
-                                            <path d="M12 5v14"></path>
-                                        </svg>
-                                        <div className="w-5 h-5 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-[8px] ml-1">
-                                            You
-                                        </div>
-                                    </div>
-
-                                    {/* Button Text */}
-                                    <span className="whitespace-nowrap font-bold text-sm ml-0 group-hover:ml-16 transition-all duration-300 text-zinc-900 dark:text-white">
-                                        Book a Free Call
-                                    </span>
-                                </div>
-                            </div>
+                            <LazyCalEmbed />
                         </div>
                     </div>
                 </FadeIn>
 
                 {/* Quote Section */}
                 <FadeIn delay={0.7}>
-                    <DailyQuote />
+                    <LazyDailyQuote />
                 </FadeIn>
             </div>
         </Container>

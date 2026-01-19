@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Search, Moon, Sun, Home, Github, Linkedin, Twitter, FileText, Briefcase, Code2 } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
-import { gsap } from "gsap";
+import { useEffect, useState } from "react";
 import { CommandMenu } from "./CommandMenu";
 
 const navItems = [
@@ -17,8 +16,6 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isDark, setIsDark] = useState(true);
-    const navRef = useRef<HTMLDivElement>(null);
-    const searchButtonRef = useRef<HTMLButtonElement>(null);
 
     // Initialize theme based on document class
     useEffect(() => {
@@ -28,30 +25,15 @@ export default function Navbar() {
     }, []);
 
     const toggleTheme = () => {
-        // Blur out
-        gsap.to("body", {
-            filter: "blur(12px)",
-            duration: 0.5, // Slower, smoother blur
-            ease: "power3.inOut",
-            onComplete: () => {
-                const newMode = !isDark;
-                setIsDark(newMode);
-                if (newMode) {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
-                }
-
-                // Blur in (unblur)
-                gsap.to("body", {
-                    filter: "blur(0px)",
-                    duration: 0.5,
-                    ease: "power3.inOut"
-                });
-            }
-        });
+        const newMode = !isDark;
+        setIsDark(newMode);
+        if (newMode) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        }
     };
 
     useEffect(() => {
@@ -77,18 +59,7 @@ export default function Navbar() {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, []);
 
-    useEffect(() => {
-        if (!navRef.current) return;
 
-        gsap.to(navRef.current, {
-            paddingLeft: isScrolled ? "1rem" : "1rem",
-            paddingRight: isScrolled ? "1rem" : "1rem",
-            borderRadius: isScrolled ? "0.5rem" : "0.75rem",
-            maxWidth: isScrolled ? "1024px" : "100%",
-            duration: 0.3, // Faster animation
-            ease: "power2.out"
-        });
-    }, [isScrolled]);
 
     return (
         <>
@@ -96,14 +67,8 @@ export default function Navbar() {
             {/* Desktop Navbar */}
             <div className="hidden md:block sticky top-0 z-50 mb-16 px-4 lg:px-8 pt-2">
                 <div
-                    ref={navRef}
-                    className="relative flex items-center justify-between bg-white/80 dark:bg-zinc-900/80 py-2.5 shadow-lg shadow-zinc-200/50 dark:shadow-zinc-800/5 backdrop-blur-md ring-1 ring-zinc-200 dark:ring-zinc-800 mx-auto transition-all duration-500"
-                    style={{
-                        paddingLeft: "1rem",
-                        paddingRight: "1rem",
-                        borderRadius: "0.75rem",
-                        maxWidth: "100%"
-                    }}
+                    className={`relative flex items-center justify-between bg-white/80 dark:bg-zinc-900/80 py-2.5 shadow-lg shadow-zinc-200/50 dark:shadow-zinc-800/5 backdrop-blur-md ring-1 ring-zinc-200 dark:ring-zinc-800 mx-auto transition-all duration-300 ${isScrolled ? 'px-4 rounded-lg max-w-4xl' : 'px-4 rounded-xl max-w-full'
+                        }`}
                 >
                     <div className="flex items-center gap-3">
                         <Link href="/" className="group relative">
@@ -130,7 +95,6 @@ export default function Navbar() {
 
                     <div className="flex items-center gap-2">
                         <button
-                            ref={searchButtonRef}
                             onClick={() => setIsMenuOpen(true)}
                             className="flex items-center gap-2 px-3 py-1.5 text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all rounded-md hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50"
                         >

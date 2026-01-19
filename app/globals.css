@@ -18,4 +18,18 @@
         color: var(--foreground);
         @apply transition-colors duration-500 font-sans antialiased;
     }
+    
+    /* Performance optimizations */
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* GPU acceleration for transforms */
+    [class*="translate"],
+    [class*="scale"],
+    [class*="rotate"] {
+        transform: translateZ(0);
+        will-change: transform;
+    }
 }
