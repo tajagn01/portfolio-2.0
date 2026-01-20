@@ -13,7 +13,8 @@ export async function GET() {
         // console.log('[API/Status] Visible Env Keys:', Object.keys(process.env).filter(k => !k.startsWith('npm_')).join(', '));
 
         if (WAKATIME_API_KEY) {
-            const today = new Date().toISOString().split('T')[0];
+            // Use IST (Asia/Kolkata) to get the correct "today" relative to the user
+            const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }); // Returns YYYY-MM-DD
             const url = `https://wakatime.com/api/v1/users/current/heartbeats?date=${today}&api_key=${WAKATIME_API_KEY}`;
             console.log(`[API/Status] Fetching WakaTime for date: ${today}`);
 
@@ -59,7 +60,15 @@ export async function GET() {
 
     // 3. Fallback to GitHub (if WakaTime is offline or not configured)
     try {
+        const headers: HeadersInit = {
+            'User-Agent': 'Next.js Status API'
+        };
+        if (process.env.GITHUB_TOKEN) {
+            headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+        }
+
         const response = await fetch('https://api.github.com/users/tajagn01/events', {
+            headers,
             next: { revalidate: 60 }
         });
 
