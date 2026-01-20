@@ -19,6 +19,7 @@ export async function GET() {
             console.log(`[API/Status] Fetching WakaTime for date: ${today}`);
 
             const response = await fetch(url, { next: { revalidate: 0 } }); // Disable cache for debugging
+            console.log(`[API/Status] WakaTime Response Status: ${response.status}`);
 
             if (response.ok) {
                 const data = await response.json();
