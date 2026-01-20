@@ -35,9 +35,11 @@ export default function StatusIndicator() {
                     } else if (diffMinutes < 60 * 24) {
                         const hours = Math.floor(diffMinutes / 60);
                         setLastActive(`Coded ${hours}h ago`);
-                    } else {
+                    } else if (diffMinutes < 60 * 24 * 7) { // Show days for up to a week
                         const days = Math.floor(diffMinutes / (60 * 24));
                         setLastActive(`Coded ${days}d ago`);
+                    } else {
+                        setLastActive('Offline');
                     }
                 }
             } catch (error) {
