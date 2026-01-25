@@ -25,6 +25,27 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        title: "Odoo HR Management",
+        slug: "odoo-hr-management",
+        desc: "Comprehensive HR management system featuring employee tracking and payroll.",
+        content: "Enterprise-grade HR module built on Odoo ERP for employee lifecycle management.",
+        tags: [
+            "Python",
+            "Odoo Framework",
+            "PostgreSQL",
+            "XML Views",
+            "ORM",
+            "RBAC",
+            "ERP Modules"
+        ],
+        link: "https://github.com/tajagn01/hr_management_odoo",
+        github: "https://github.com/tajagn01/hr_management_odoo",
+        image: "/projects/odoo_hr.png",
+        status: "Building",
+        isBuilding: true
+    },
+
+    {
         title: "RankArena",
         slug: "rank-arena",
         desc: "Discover Your College Rank - A platform for students to track and compare academic performance.",
@@ -104,27 +125,6 @@ export const projects: Project[] = [
         link: "https://aisearch01.netlify.app",
         github: "https://github.com/tajagn01/AI-Visual-Search",
         image: "/projects/ai_search.png",
-        status: "Building",
-        isBuilding: true
-    },
-
-    {
-        title: "Odoo HR Management",
-        slug: "odoo-hr-management",
-        desc: "Comprehensive HR management system featuring employee tracking and payroll.",
-        content: "Enterprise-grade HR module built on Odoo ERP for employee lifecycle management.",
-        tags: [
-            "Python",
-            "Odoo Framework",
-            "PostgreSQL",
-            "XML Views",
-            "ORM",
-            "RBAC",
-            "ERP Modules"
-        ],
-        link: "https://github.com/tajagn01/hr_management_odoo",
-        github: "https://github.com/tajagn01/hr_management_odoo",
-        image: "/projects/odoo_hr.png",
         status: "Building",
         isBuilding: true
     },
@@ -274,5 +274,5 @@ export const projects: Project[] = [
         image: "/projects/protfolio_website.png",
         status: "Live",
         isBuilding: false
-    }
+    },
 ];
