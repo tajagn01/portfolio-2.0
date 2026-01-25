@@ -25,13 +25,13 @@ export interface Project {
 
 export const projects: Project[] = [
     {
-        title: "Odoo HR Management",
-        slug: "odoo-hr-management",
+        title: "HR Management",
+        slug: "hr-management",
         desc: "Comprehensive HR management system featuring employee tracking and payroll.",
-        content: "Enterprise-grade HR module built on Odoo ERP for employee lifecycle management.",
+        content: "Enterprise-grade HR module built on  ERP for employee lifecycle management.",
         tags: [
             "Python",
-            "Odoo Framework",
+            "Framework",
             "PostgreSQL",
             "XML Views",
             "ORM",
@@ -40,7 +40,7 @@ export const projects: Project[] = [
         ],
         link: "https://github.com/tajagn01/hr_management_odoo",
         github: "https://github.com/tajagn01/hr_management_odoo",
-        image: "/projects/odoo_hr.png",
+        image: "/projects/hr_managemant_2.png",
         status: "Building",
         isBuilding: true
     },
