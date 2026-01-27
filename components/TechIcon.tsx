@@ -136,6 +136,25 @@ export default function TechIcon({ name }: TechIconProps) {
         "Figma": SiFigma,
         "PyTorch": SiPytorch,
         "TensorFlow Lite": SiTensorflow,
+        // New Mappings
+        "Next.js 16 (App Router)": SiNextdotjs,
+        "PostgreSQL (Neon)": SiPostgresql,
+        "Prisma": SiPrisma,
+        "NextAuth.js v5": ShieldCheck,
+        "Shadcn/UI": Palette,
+        "Vector Database": Database,
+        "Django": Code2, // Fallback as SiDjango is not imported
+        "HTML5/CSS3": SiHtml5,
+        "SQLite/Postgres": SiPostgresql,
+        "Bootstrap/Tailwind": SiTailwindcss,
+        "Render": Cloud,
+        "Expo": Smartphone,
+        "GSAP (GreenSock)": SiGreensock,
+        "JavaScript (ES6+)": SiJavascript,
+        "Radix UI": Box,
+        "Recharts": LineChart,
+        "CSS Modules": SiCss3,
+        "EmailJS": Zap,
     };
 
     // Color mapping for each technology
@@ -184,6 +203,25 @@ export default function TechIcon({ name }: TechIconProps) {
         "Figma": "text-[#F24E1E]",
         "PyTorch": "text-[#EE4C2C]",
         "TensorFlow Lite": "text-[#FF6F00]",
+        // New Mappings Colors
+        "Next.js 16 (App Router)": "text-black dark:text-white",
+        "PostgreSQL (Neon)": "text-[#4169E1]",
+        "Prisma": "text-[#2D3748] dark:text-white",
+        "NextAuth.js v5": "text-purple-500",
+        "Shadcn/UI": "text-black dark:text-white",
+        "Vector Database": "text-purple-600",
+        "Django": "text-[#092E20]",
+        "HTML5/CSS3": "text-[#E34F26]",
+        "SQLite/Postgres": "text-[#4169E1]",
+        "Bootstrap/Tailwind": "text-[#06B6D4]",
+        "Render": "text-black dark:text-white",
+        "Expo": "text-black dark:text-white",
+        "GSAP (GreenSock)": "text-[#88CE02]",
+        "JavaScript (ES6+)": "text-[#F7DF1E]",
+        "Radix UI": "text-black dark:text-white",
+        "Recharts": "text-[#FF6384]",
+        "CSS Modules": "text-[#1572B6]",
+        "EmailJS": "text-[#FCA326]",
     };
 
     const Icon = iconMap[name] || Code2;

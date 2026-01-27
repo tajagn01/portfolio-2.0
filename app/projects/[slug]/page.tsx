@@ -156,6 +156,27 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                                         </p>
                                     </div>
                                 </div>
+
+                                {project.techStack && project.techStack.length > 0 && (
+                                    <section>
+                                        <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-4 flex items-center gap-2">
+                                            <span className="h-1 w-6 bg-zinc-900 dark:bg-white rounded-full"></span>
+                                            Tech Stack
+                                        </h2>
+                                        <div className="bg-zinc-50 dark:bg-zinc-900/50 rounded-2xl p-6 border border-zinc-100 dark:border-zinc-800">
+                                            <div className="grid gap-6 sm:grid-cols-2">
+                                                {project.techStack.map((tech, idx) => (
+                                                    <div key={idx} className="space-y-1">
+                                                        <h3 className="font-semibold text-zinc-900 dark:text-white">{tech.name}</h3>
+                                                        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                                            {tech.useCase}
+                                                        </p>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </section>
+                                )}
                             </>
                         )}
                     </div>
@@ -173,6 +194,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                     </div>
                 </div>
             </div>
-        </Container>
+        </Container >
     );
 }

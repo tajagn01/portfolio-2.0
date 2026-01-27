@@ -13,7 +13,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Tajagn Garala | Full Stack Developer Portfolio",
+    metadataBase: new URL('https://tajagn.in'),
+    title: {
+        default: "Tajagn Garala | Full Stack Developer Portfolio",
+        template: "%s | Tajagn Garala"
+    },
     description: "Tajagn Garala - Full Stack Web Developer specializing in React, Next.js, TypeScript, and PostgreSQL. View my portfolio of web applications and projects.",
     keywords: [
         "Tajagn",
@@ -38,14 +42,17 @@ export const metadata: Metadata = {
     authors: [{ name: "Tajagn Garala", url: "https://www.linkedin.com/in/tajagn-garala-06ba45265/" }],
     creator: "Tajagn Garala",
     publisher: "Tajagn Garala",
+    alternates: {
+        canonical: '/',
+    },
     icons: {
         icon: '/logo.jpg',
     },
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        url: 'https://tajagn-garala.vercel.app',
-        siteName: 'Tajagn Garala Portfolio',
+        url: 'https://tajagn.in',
+        siteName: 'Tajagn Garala',
         title: 'Tajagn Garala | Full Stack Developer',
         description: 'Full Stack Web Developer specializing in React, Next.js, TypeScript, and PostgreSQL. Building modern web applications.',
         images: [
@@ -97,8 +104,8 @@ export default function RootLayout({
                             "@type": "Person",
                             "name": "Tajagn Garala",
                             "alternateName": "Tajagn",
-                            "url": "https://tajagn-garala.vercel.app",
-                            "image": "https://tajagn-garala.vercel.app/logo.jpg",
+                            "url": "https://tajagn.in",
+                            "image": "https://tajagn.in/logo.jpg",
                             "sameAs": [
                                 "https://github.com/tajagn01",
                                 "https://www.linkedin.com/in/tajagn-garala-06ba45265/",
