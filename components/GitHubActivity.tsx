@@ -59,6 +59,13 @@ export default function GitHubActivity() {
                     const pushEvent = events.find((event: any) => event.type === 'PushEvent');
                     if (pushEvent) {
                         setLastCommit(pushEvent.created_at);
+                        localStorage.setItem('lastCommitDate', pushEvent.created_at);
+                    }
+                } else {
+                    // Fallback: try to get from cache
+                    const cachedDate = localStorage.getItem('lastCommitDate');
+                    if (cachedDate) {
+                        setLastCommit(cachedDate);
                     }
                 }
 

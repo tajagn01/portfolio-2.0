@@ -3,9 +3,9 @@
 import Container from "@/components/ui/Container";
 import Link from "next/link";
 import Image from "next/image";
-import LazyGitHubActivity from "@/components/LazyGitHubActivity";
-import LazyDailyQuote from "@/components/LazyDailyQuote";
-import LazyCalEmbed from "@/components/LazyCalEmbed";
+import GitHubActivity from "@/components/GitHubActivity";
+import DailyQuote from "@/components/DailyQuote";
+import CalEmbed from "@/components/CalEmbed";
 import StatusIndicator from "@/components/StatusIndicator";
 import { FileText, Send, Twitter, Linkedin, Github, Briefcase, Code2, Package, Database, Box, AtSign, User, ArrowRight, ExternalLink } from "lucide-react";
 import { SiReact, SiJavascript, SiTypescript, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPrisma, SiTailwindcss, SiFigma, SiVercel, SiAmazon, SiPostman, SiC, SiCplusplus, SiPython } from "react-icons/si";
@@ -216,7 +216,7 @@ export default function Home() {
 
                 {/* GitHub Activity Section */}
                 <FadeIn delay={0.3}>
-                    <LazyGitHubActivity />
+                    <GitHubActivity />
                 </FadeIn>
 
                 {/* Projects Section */}
@@ -358,14 +358,14 @@ export default function Home() {
                             <p className="opacity-50 text-base md:text-xl mb-6 text-center text-zinc-900 dark:text-white">
                                 Hey, you scrolled this far, let's talk.
                             </p>
-                            <LazyCalEmbed />
+                            <CalEmbed />
                         </div>
                     </div>
                 </FadeIn>
 
                 {/* Quote Section */}
                 <FadeIn delay={0.7}>
-                    <LazyDailyQuote />
+                    <DailyQuote />
                 </FadeIn>
             </div>
         </Container>
