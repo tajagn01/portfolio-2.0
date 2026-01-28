@@ -49,7 +49,7 @@ export const projects: Project[] = [
             { name: "NextAuth.js v5", useCase: "Secure role-based authentication and session management" },
             { name: "Shadcn/UI", useCase: "Accessible and customizable component library for the UI" }
         ],
-        link: "https://github.com/tajagn01/hr_management_odoo",
+        link: "https://dayflow-rust.vercel.app",
         github: "https://github.com/tajagn01/hr_management_odoo",
         image: "/projects/hr_managemant_2.png",
         status: "Building",
@@ -133,6 +133,109 @@ export const projects: Project[] = [
         status: "Live",
         isBuilding: false
     },
+    {
+        title: "LuxeState",
+        slug: "luxe-state",
+        desc: "Premium real estate platform with immersive animations.",
+        content: "Luxury real estate application built for visual impact and performance, featuring smooth page transitions and interactive property showcases.",
+        tags: [
+            "React",
+            "Vite",
+            "TailwindCSS",
+            "Framer Motion",
+            "Radix UI"
+        ],
+        techStack: [
+            { name: "React", useCase: "Component-based UI architecture for modular development" },
+            { name: "Vite", useCase: "Next-generation frontend tooling for ultra-fast build times" },
+            { name: "TailwindCSS", useCase: "Utility-first CSS framework for rapid and responsive styling" },
+            { name: "Framer Motion", useCase: "Production-ready animation library for complex UI interactions" },
+            { name: "Radix UI", useCase: "Unstyled, accessible components for building high-quality design systems" }
+        ],
+        link: "https://luxestate001.vercel.app",
+        github: "https://github.com/tajagn01/LuxeState-frontend-website",
+        image: "/projects/luxe_state.png",
+        status: "Live",
+        isBuilding: false
+    },
+    {
+        title: "CodeCrafter",
+        slug: "codecrafter",
+        desc: "A modern web application built with React and Vite.",
+        content: "Personal portfolio showcasing projects and frontend expertise.",
+        tags: [
+            "React",
+            "Vite",
+            "Tailwind CSS",
+            "Framer Motion",
+            "EmailJS"
+        ],
+        techStack: [
+            { name: "React", useCase: "Core library for building the UI components" },
+            { name: "Vite", useCase: "Fast build tool and dev server" },
+            { name: "Tailwind CSS", useCase: "Utility-first styling for specific design needs" },
+            { name: "Framer Motion", useCase: "Page transitions and element reveal animations" },
+            { name: "EmailJS", useCase: "Handling contact form submissions serverlessly" }
+        ],
+        link: "https://codecrafter01.netlify.app/",
+        github: "https://github.com/tajagn01/portfolio",
+        image: "/projects/protfolio_website.png",
+        status: "Live",
+        isBuilding: false
+    },
+
+
+    {
+        title: "SaaS Frontend",
+        slug: "saas-frontend",
+        desc: "Modern SaaS landing page with high-conversion design.",
+        content: "High-performance SaaS landing page focused on conversions and UX.",
+        tags: [
+            "React",
+            "Tailwind CSS",
+            "Framer Motion",
+            "Vercel",
+            "Radix UI"
+        ],
+        techStack: [
+            { name: "React", useCase: "Component-based architecture for reusable UI blocks" },
+            { name: "Tailwind CSS", useCase: "Implementing a custom design system and responsive layout" },
+            { name: "Framer Motion", useCase: "Adding subtle micro-interactions and entry animations" },
+            { name: "Vercel", useCase: "Continuous deployment and hosting" },
+            { name: "Radix UI", useCase: "Accessible unstyled primitives for complex interactive components" }
+        ],
+        link: "https://ravel01.netlify.app",
+        github: "https://github.com/tajagn01/saas-website-frontend",
+        image: "/projects/saas_website.png",
+        status: "Live",
+        isBuilding: false
+    },
+
+    {
+        title: "Real CS",
+        slug: "real-cs",
+        desc: "Real-time SaaS platform with advanced frontend architecture.",
+        content: "Real-time customer success dashboard built for speed and scalability.",
+        tags: [
+            "Socket.io",
+            "Redis",
+            "React",
+            "Node.js",
+            "Recharts"
+        ],
+        techStack: [
+            { name: "Socket.io", useCase: "Bi-directional real-time communication between client and server" },
+            { name: "Redis", useCase: "In-memory store for fast session management and caching" },
+            { name: "React", useCase: "Reactive UI that updates instantly with socket events" },
+            { name: "Node.js", useCase: "Event-driven backend to handle concurrent connections" },
+            { name: "Recharts", useCase: "Real-time data visualization charts" }
+        ],
+        link: "https://realcs01.netlify.app",
+        github: "https://github.com/tajagn01/Real_CS",
+        image: "/projects/real_cs.png",
+        status: "Building",
+        isBuilding: false
+    },
 
     {
         title: "AI Visual Search",
@@ -160,6 +263,7 @@ export const projects: Project[] = [
         isBuilding: true
     },
 
+
     {
         title: "Blog Website",
         slug: "blog-website",
@@ -185,6 +289,8 @@ export const projects: Project[] = [
         status: "Live",
         isBuilding: false
     },
+
+
 
     {
         title: "KrishiMitra",
@@ -231,64 +337,16 @@ export const projects: Project[] = [
             { name: "JavaScript (ES6+)", useCase: "Logic for interactive elements and DOM manipulation" },
             { name: "CSS3", useCase: "Hardware-accelerated transitions and effects" }
         ],
-        link: "https://github.com/tajagn01/Monster-Energy-drink-webiste",
+        link: "https://monster001.netlify.app",
         github: "https://github.com/tajagn01/Monster-Energy-drink-webiste",
         image: "/projects/monster_dp.png",
         status: "Building",
         isBuilding: false
     },
 
-    {
-        title: "SaaS Frontend",
-        slug: "saas-frontend",
-        desc: "Modern SaaS landing page with high-conversion design.",
-        content: "High-performance SaaS landing page focused on conversions and UX.",
-        tags: [
-            "React",
-            "Tailwind CSS",
-            "Framer Motion",
-            "Vercel",
-            "Radix UI"
-        ],
-        techStack: [
-            { name: "React", useCase: "Component-based architecture for reusable UI blocks" },
-            { name: "Tailwind CSS", useCase: "Implementing a custom design system and responsive layout" },
-            { name: "Framer Motion", useCase: "Adding subtle micro-interactions and entry animations" },
-            { name: "Vercel", useCase: "Continuous deployment and hosting" },
-            { name: "Radix UI", useCase: "Accessible unstyled primitives for complex interactive components" }
-        ],
-        link: "https://github.com/tajagn01/saas-website-frontend",
-        github: "https://github.com/tajagn01/saas-website-frontend",
-        image: "/projects/saas_website.png",
-        status: "Live",
-        isBuilding: false
-    },
 
-    {
-        title: "Real CS",
-        slug: "real-cs",
-        desc: "Real-time SaaS platform with advanced frontend architecture.",
-        content: "Real-time customer success dashboard built for speed and scalability.",
-        tags: [
-            "Socket.io",
-            "Redis",
-            "React",
-            "Node.js",
-            "Recharts"
-        ],
-        techStack: [
-            { name: "Socket.io", useCase: "Bi-directional real-time communication between client and server" },
-            { name: "Redis", useCase: "In-memory store for fast session management and caching" },
-            { name: "React", useCase: "Reactive UI that updates instantly with socket events" },
-            { name: "Node.js", useCase: "Event-driven backend to handle concurrent connections" },
-            { name: "Recharts", useCase: "Real-time data visualization charts" }
-        ],
-        link: "https://github.com/tajagn01/Real_CS",
-        github: "https://github.com/tajagn01/Real_CS",
-        image: "/projects/real_cs.png",
-        status: "Building",
-        isBuilding: false
-    },
+
+
 
     {
         title: "Gujarat Flavors",
@@ -316,29 +374,5 @@ export const projects: Project[] = [
         isBuilding: false
     },
 
-    {
-        title: "CodeCrafter",
-        slug: "codecrafter",
-        desc: "A modern web application built with React and Vite.",
-        content: "Personal portfolio showcasing projects and frontend expertise.",
-        tags: [
-            "React",
-            "Vite",
-            "Tailwind CSS",
-            "Framer Motion",
-            "EmailJS"
-        ],
-        techStack: [
-            { name: "React", useCase: "Core library for building the UI components" },
-            { name: "Vite", useCase: "Fast build tool and dev server" },
-            { name: "Tailwind CSS", useCase: "Utility-first styling for specific design needs" },
-            { name: "Framer Motion", useCase: "Page transitions and element reveal animations" },
-            { name: "EmailJS", useCase: "Handling contact form submissions serverlessly" }
-        ],
-        link: "https://codecrafter01.netlify.app/",
-        github: "https://github.com/tajagn01/portfolio",
-        image: "/projects/protfolio_website.png",
-        status: "Live",
-        isBuilding: false
-    }
+
 ];

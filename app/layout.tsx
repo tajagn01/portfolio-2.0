@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://tajagn.in'),
+    metadataBase: new URL('https://tajagn.vercel.app'),
     title: {
         default: "Tajagn Garala | Full Stack Developer Portfolio",
         template: "%s | Tajagn Garala"
@@ -22,14 +22,16 @@ export const metadata: Metadata = {
     keywords: [
         "Tajagn",
         "Tajagn Garala",
-        "Full Stack Developer",
-        "Web Developer",
-        "React Developer",
-        "Next.js Developer",
-        "TypeScript Developer",
-        "Frontend Developer",
-        "Backend Developer",
-        "Portfolio",
+        "garala tajagn",
+        "tajagnx",
+        "tajagn Full Stack Developer",
+        "Tajagn Web Developer",
+        "Tajagn React Developer",
+        "Tajagn Next.js Developer",
+        "Tajagn TypeScript Developer",
+        "Tajagn Frontend Developer",
+        "Tajagn Backend Developer",
+        "tajagnPortfolio",
         "JavaScript",
         "Node.js",
         "PostgreSQL",
@@ -51,7 +53,7 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        url: 'https://tajagn.in',
+        url: 'https://tajagn.vercel.app',
         siteName: 'Tajagn Garala',
         title: 'Tajagn Garala | Full Stack Developer',
         description: 'Full Stack Web Developer specializing in React, Next.js, TypeScript, and PostgreSQL. Building modern web applications.',
@@ -104,8 +106,8 @@ export default function RootLayout({
                             "@type": "Person",
                             "name": "Tajagn Garala",
                             "alternateName": "Tajagn",
-                            "url": "https://tajagn.in",
-                            "image": "https://tajagn.in/logo.jpg",
+                            "url": "https://tajagn.vercel.app",
+                            "image": "https://tajagn.vercel.app/logo.jpg",
                             "sameAs": [
                                 "https://github.com/tajagn01",
                                 "https://www.linkedin.com/in/tajagn-garala-06ba45265/",

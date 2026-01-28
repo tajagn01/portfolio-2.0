@@ -8,7 +8,8 @@ import LazyDailyQuote from "@/components/LazyDailyQuote";
 import LazyCalEmbed from "@/components/LazyCalEmbed";
 import StatusIndicator from "@/components/StatusIndicator";
 import { FileText, Send, Twitter, Linkedin, Github, Briefcase, Code2, Package, Database, Box, AtSign, User, ArrowRight, ExternalLink } from "lucide-react";
-import { SiReact, SiBun, SiJavascript, SiTypescript, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPrisma, SiTailwindcss, SiFigma, SiVercel, SiAmazon, SiPostman } from "react-icons/si";
+import { SiReact, SiJavascript, SiTypescript, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPrisma, SiTailwindcss, SiFigma, SiVercel, SiAmazon, SiPostman, SiC, SiCplusplus, SiPython } from "react-icons/si";
+import { FaJava } from "react-icons/fa";
 import { projects } from "@/lib/data";
 import TechIcon from "@/components/TechIcon";
 import FadeIn from "@/components/FadeIn";
@@ -185,10 +186,7 @@ export default function Home() {
                                             <SiPostman className="h-3.5 w-3.5 text-orange-600" />
                                             Postman
                                         </a>
-                                        <a href="https://bun.sh/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-black/5 dark:bg-white/15 border border-dashed dark:border-white/30 border-black/20 px-2 py-1 text-xs font-bold text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                            <SiBun className="h-3.5 w-3.5 text-black dark:text-white" />
-                                            Bun
-                                        </a>
+
                                     </div>
                                 </div>
 
@@ -316,8 +314,17 @@ export default function Home() {
                                         <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="React">
                                             <SiReact className="h-5 w-5 text-[#61DAFB] group-hover:drop-shadow-[0_0_8px_rgba(97,218,251,0.5)] transition-all" />
                                         </div>
-                                        <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="Bun">
-                                            <SiBun className="h-5 w-5 text-black dark:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all" />
+                                        <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="C">
+                                            <SiC className="h-5 w-5 text-[#A8B9CC] group-hover:drop-shadow-[0_0_8px_rgba(168,185,204,0.5)] transition-all" />
+                                        </div>
+                                        <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="C++">
+                                            <SiCplusplus className="h-5 w-5 text-[#00599C] group-hover:drop-shadow-[0_0_8px_rgba(0,89,156,0.5)] transition-all" />
+                                        </div>
+                                        <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="Java">
+                                            <FaJava className="h-5 w-5 text-[#007396] group-hover:drop-shadow-[0_0_8px_rgba(0,115,150,0.5)] transition-all" />
+                                        </div>
+                                        <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="Python">
+                                            <SiPython className="h-5 w-5 text-[#3776AB] group-hover:drop-shadow-[0_0_8px_rgba(55,118,171,0.5)] transition-all" />
                                         </div>
                                         <div className="h-10 w-10 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer rounded-lg bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/50 group" title="JavaScript">
                                             <SiJavascript className="h-5 w-5 text-[#F7DF1E] group-hover:drop-shadow-[0_0_8px_rgba(247,223,30,0.5)] transition-all" />

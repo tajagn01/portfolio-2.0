@@ -17,20 +17,50 @@ export default function GitHubActivity() {
     const [contributionData, setContributionData] = useState<ContributionData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [lastCommit, setLastCommit] = useState<string | null>(null);
+
+    const formatTimeAgo = (dateString: string) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+        if (seconds < 60) return 'just now';
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) return `${minutes}m ago`;
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return `${hours}h ago`;
+        const days = Math.floor(hours / 24);
+        if (days < 30) return `${days}d ago`;
+        const months = Math.floor(days / 30);
+        if (months < 12) return `${months}mo ago`;
+        return `${Math.floor(months / 12)}y ago`;
+    };
 
     useEffect(() => {
         const fetchGitHubContributions = async () => {
             try {
                 const username = 'tajagn01';
 
-                // Use public GitHub contributions API (no authentication required)
-                const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`);
+                // Fetch contributions and events in parallel
+                const [contributionsResponse, eventsResponse] = await Promise.all([
+                    fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`),
+                    fetch(`https://api.github.com/users/${username}/events`)
+                ]);
 
-                if (!response.ok) {
+                if (!contributionsResponse.ok) {
                     throw new Error('Failed to fetch GitHub data');
                 }
 
-                const data = await response.json();
+                const data = await contributionsResponse.json();
+
+                // Process events for last commit
+                if (eventsResponse.ok) {
+                    const events = await eventsResponse.json();
+                    const pushEvent = events.find((event: any) => event.type === 'PushEvent');
+                    if (pushEvent) {
+                        setLastCommit(pushEvent.created_at);
+                    }
+                }
 
                 // Process the data into weeks format
                 const contributions = data.contributions;
@@ -186,11 +216,18 @@ export default function GitHubActivity() {
                             Total: <span className="font-black text-zinc-900 dark:text-white">{contributionData.total.toLocaleString()}</span> contributions in the last year
                         </p>
                     </div>
+                    {lastCommit && (
+                        <div>
+                            <p className="text-sm text-zinc-600 dark:text-white font-medium mt-1">
+                                Last commit: <span className="font-black text-zinc-900 dark:text-white">{formatTimeAgo(lastCommit)}</span>
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Contribution Graph */}
                 {/* Contribution Graph */}
-                <div className="w-fit max-w-full mx-auto bg-white dark:bg-[#0d1117] rounded-xl border border-zinc-200 dark:border-[#30363d] p-4 sm:p-8 overflow-hidden group hover:border-zinc-300 dark:hover:border-zinc-600 transition-all duration-300">
+                <div className="w-fit max-w-full mx-auto bg-white dark:bg-[#0d1117] rounded-xl border-2 border-dashed border-zinc-200 dark:border-[#30363d] p-4 sm:p-8 overflow-hidden group hover:border-zinc-300 dark:hover:border-zinc-600 transition-all duration-300">
                     <div className="overflow-x-auto pb-2">
                         <div className="min-w-[700px] mx-auto">
                             {/* Month labels */}

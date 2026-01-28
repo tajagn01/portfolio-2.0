@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Search, Moon, Sun, Home, Github, Linkedin, Twitter, FileText, Briefcase, Code2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CommandMenu } from "./CommandMenu";
 
 const navItems = [
@@ -16,6 +16,9 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isDark, setIsDark] = useState(true);
+
+    const [isVisible, setIsVisible] = useState(true);
+    const lastScrollY = useRef(0);
 
     // Initialize theme based on document class
     useEffect(() => {
@@ -38,8 +41,19 @@ export default function Navbar() {
 
     useEffect(() => {
         const handleScroll = () => {
-            const scrolled = window.scrollY > 20;
+            const currentScrollY = window.scrollY;
+            const scrolled = currentScrollY > 20;
             setIsScrolled(scrolled);
+
+            // Determine scroll direction and toggle visibility
+            if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+                // Scrolling down & past threshold -> hide
+                setIsVisible(false);
+            } else {
+                // Scrolling up -> show
+                setIsVisible(true);
+            }
+            lastScrollY.current = currentScrollY;
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -116,7 +130,7 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Bottom Navigation */}
-            <div className="md:hidden fixed bottom-4 left-4 right-4 z-[100]">
+            <div className={`md:hidden fixed bottom-4 left-4 right-4 z-[100] transition-transform duration-300 ${isVisible ? 'translate-y-0' : 'translate-y-[150%]'}`}>
                 <div className="flex items-center justify-around bg-zinc-900/90 backdrop-blur-md rounded-2xl px-6 py-3 shadow-lg ring-1 ring-zinc-800">
                     <Link href="/" className={`transition-colors ${pathname === "/" ? "text-white" : "text-zinc-400 hover:text-white"}`}>
                         <Home className="h-6 w-6" />
