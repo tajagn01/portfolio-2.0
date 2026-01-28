@@ -147,13 +147,32 @@ export default function GitHubActivity() {
             const firstValidDay = week.find(day => day.date !== '');
             if (firstValidDay) {
                 const weekMonth = new Date(firstValidDay.date).getMonth();
-                if (weekMonth !== currentMonth && weekIndex > 0) {
-                    currentMonth = weekMonth;
+                if (weekMonth !== currentMonth) {
                     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                    months.push({
-                        label: monthNames[weekMonth],
-                        offset: weekIndex
-                    });
+
+                    if (months.length === 0) {
+                        months.push({
+                            label: monthNames[weekMonth],
+                            offset: weekIndex
+                        });
+                    } else {
+                        const gap = weekIndex - months[months.length - 1].offset;
+                        if (gap >= 2) {
+                            months.push({
+                                label: monthNames[weekMonth],
+                                offset: weekIndex
+                            });
+                        } else if (months.length === 1 && months[0].offset === 0) {
+                            // Overlap at start: replace stub with full month
+                            months.pop();
+                            months.push({
+                                label: monthNames[weekMonth],
+                                offset: weekIndex
+                            });
+                        }
+                    }
+
+                    currentMonth = weekMonth;
                 }
             }
         });
