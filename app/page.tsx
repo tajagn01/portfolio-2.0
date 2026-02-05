@@ -83,7 +83,7 @@ export default function Home() {
 
                             <div className="flex flex-wrap gap-4 pt-2">
                                 <a
-                                    href="/projects/Garala Tajagn  (1).pdf"
+                                    href="/projects/Tajagn_frontend.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 rounded-md bg-zinc-800/80 dark:bg-zinc-800/80 px-4 py-2 text-sm font-medium text-white dark:text-zinc-300 transition-colors hover:bg-zinc-700 dark:hover:bg-zinc-800 hover:text-white ring-1 ring-zinc-700/50"
