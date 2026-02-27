@@ -29,6 +29,8 @@ export interface Project {
     };
 }
 
+
+
 export const projects: Project[] = [
     {
         title: "HR Management",

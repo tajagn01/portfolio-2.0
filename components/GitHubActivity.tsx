@@ -44,7 +44,7 @@ export default function GitHubActivity() {
                 // Fetch contributions and events in parallel
                 const [contributionsResponse, eventsResponse] = await Promise.all([
                     fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`),
-                    fetch(`https://api.github.com/users/${username}/events`)
+                    fetch(`/api/github/events`)
                 ]);
 
                 if (!contributionsResponse.ok) {
@@ -53,13 +53,12 @@ export default function GitHubActivity() {
 
                 const data = await contributionsResponse.json();
 
-                // Process events for last commit
+                // Process events for last commit (via authenticated server-side API)
                 if (eventsResponse.ok) {
-                    const events = await eventsResponse.json();
-                    const pushEvent = events.find((event: any) => event.type === 'PushEvent');
-                    if (pushEvent) {
-                        setLastCommit(pushEvent.created_at);
-                        localStorage.setItem('lastCommitDate', pushEvent.created_at);
+                    const eventsData = await eventsResponse.json();
+                    if (eventsData.lastCommitDate) {
+                        setLastCommit(eventsData.lastCommitDate);
+                        localStorage.setItem('lastCommitDate', eventsData.lastCommitDate);
                     }
                 } else {
                     // Fallback: try to get from cache
