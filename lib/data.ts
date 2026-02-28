@@ -59,6 +59,52 @@ export const projects: Project[] = [
     },
 
     {
+        title: "RentalHub",
+        slug: "rentalhub",
+        desc: "A role-based rental management platform designed around real-world workflows and scalability.",
+        content: "RentalHub is a modern rental management system with dedicated dashboards for Admin, Vendor, and Customer roles — enabling seamless product listing, browsing, renting, and platform oversight.",
+        tags: [
+            "MongoDB",
+            "Express.js",
+            "React",
+            "Node.js",
+            "Tailwind CSS"
+        ],
+        techStack: [
+            { name: "MongoDB", useCase: "NoSQL database for flexible rental and user data storage" },
+            { name: "Express.js", useCase: "Backend API framework for handling role-based routes and logic" },
+            { name: "React", useCase: "Dynamic frontend with separate dashboards for each role" },
+            { name: "Node.js", useCase: "Runtime environment powering the server-side application" },
+            { name: "Tailwind CSS", useCase: "Utility-first CSS framework for responsive, modern UI design" }
+        ],
+        link: "https://rental-management-system-nine.vercel.app",
+        github: "https://github.com/tajagn01/rental-management-system",
+        image: "/projects/rent_hub.png",
+        status: "Live",
+        isBuilding: false,
+        details: {
+            overview: "RentalHub is a full-stack MERN application that provides a complete rental management solution with role-based access control. It features three distinct dashboards — Admin, Vendor, and Customer — each tailored to specific workflows.",
+            features: [
+                "Vendor Dashboard – List products, manage rentals, and track activity",
+                "Customer Dashboard – Browse available products and rent seamlessly",
+                "Admin Dashboard – Manage vendors, customers, and platform-wide insights",
+                "Role-based authentication with separate dashboards for Admin, Vendor, and Customer",
+                "Invoice download functionality available for all user roles",
+                "Real-time rental tracking and activity management"
+            ],
+            motivation: "Built to solve the complexity of multi-role rental platforms, providing a scalable and intuitive experience for property managers trusted by 10,000+ users.",
+            techStack: [
+                { name: "MongoDB", desc: "Flexible document database for storing rental listings, users, and transactions" },
+                { name: "Express.js", desc: "Lightweight Node.js framework for building RESTful APIs" },
+                { name: "React", desc: "Component-based frontend library for building interactive dashboards" },
+                { name: "Node.js", desc: "JavaScript runtime for scalable backend services" },
+                { name: "Tailwind CSS", desc: "Utility-first CSS framework for rapid, responsive UI development" }
+            ],
+            impact: "A production-ready rental management platform demonstrating full-stack MERN proficiency with real-world multi-role architecture and scalable design patterns."
+        }
+    },
+
+    {
         title: "RankArena",
         slug: "rank-arena",
         desc: "Discover Your College Rank - A platform for students to track and compare academic performance.",
