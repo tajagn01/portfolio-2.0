@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getBlogContent, getAllBlogs } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { codeToHtml } from "shiki";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -46,7 +47,7 @@ function isGitaQuote(line: string): boolean {
     );
 }
 
-function renderContent(content: string) {
+async function renderContent(content: string) {
     const lines = content.split("\n");
     const elements: React.ReactNode[] = [];
     let i = 0;
@@ -112,6 +113,18 @@ function renderContent(content: string) {
                 i++;
             }
             i++;
+            const codeString = codeLines.join("\n");
+            let htmlCode = codeString;
+            try {
+                htmlCode = await codeToHtml(codeString, {
+                    lang: lang || 'text',
+                    theme: 'github-dark'
+                });
+            } catch (e) {
+                // Fallback if language is not supported
+                htmlCode = `<pre><code>${codeString}</code></pre>`;
+            }
+
             elements.push(
                 <div key={keyCounter++} className="my-4 rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700/50">
                     {lang && (
@@ -119,11 +132,10 @@ function renderContent(content: string) {
                             {lang}
                         </div>
                     )}
-                    <pre className="p-4 overflow-x-auto bg-zinc-50 dark:bg-zinc-900/60">
-                        <code className="text-xs text-zinc-800 dark:text-zinc-200 font-mono leading-relaxed">
-                            {codeLines.join("\n")}
-                        </code>
-                    </pre>
+                    <div 
+                        className="[&>pre]:p-4 [&>pre]:overflow-x-auto [&>pre]:bg-zinc-50 [&>pre]:dark:bg-zinc-900/60 [&_code]:text-xs [&_code]:font-mono [&_code]:leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: htmlCode }} 
+                    />
                 </div>
             );
             continue;
@@ -281,7 +293,7 @@ export default async function BlogPostPage({ params }: Props) {
 
                         {/* Content */}
                         <div className="prose-custom">
-                            {renderContent(post.content)}
+                            {await renderContent(post.content)}
                         </div>
 
                         {/* Tags footer */}

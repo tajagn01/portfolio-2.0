@@ -1,4 +1,3 @@
-"use client";
 
 import Container from "@/components/ui/Container";
 import Link from "next/link";
@@ -10,11 +9,12 @@ import StatusIndicator from "@/components/StatusIndicator";
 import { FileText, Send, Twitter, Linkedin, Github, Briefcase, Code2, Package, Database, Box, AtSign, User, ArrowRight, ExternalLink } from "lucide-react";
 import { SiReact, SiJavascript, SiTypescript, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPrisma, SiTailwindcss, SiFigma, SiVercel, SiAmazon, SiPostman, SiC, SiCplusplus, SiPython } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
-import { projects } from "@/lib/data";
+import { getAllProjects } from "@/lib/project";
 import TechIcon from "@/components/TechIcon";
 import FadeIn from "@/components/FadeIn";
 
 export default function Home() {
+    const projects = getAllProjects();
 
     return (
         <Container>

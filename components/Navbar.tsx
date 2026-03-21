@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Search, Moon, Sun, Home, Github, Linkedin, Twitter, FileText, Briefcase, Code2, BookOpen } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { CommandMenu } from "./CommandMenu";
+import dynamic from "next/dynamic";
+
+const CommandMenu = dynamic(() => import('./CommandMenu').then((mod) => mod.CommandMenu), { ssr: false });
 
 const navItems = [
     { name: "Work", href: "/work" },
@@ -95,7 +98,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-3">
                         <Link href="/" className="group relative">
                             <div className="h-8 w-8 overflow-hidden rounded-full transition-transform hover:scale-110 active:scale-95">
-                                <img src="/logo.jpg" alt="Logo" className="h-full w-full object-cover" />
+                                <Image src="/logo.jpg" alt="Logo" width={32} height={32} className="h-full w-full object-cover" priority />
                             </div>
                         </Link>
 

@@ -2,13 +2,17 @@ import { ArrowLeft, Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
-import { projects } from "@/lib/data";
+import { getProjectContent, getAllProjects } from "@/lib/project";
 import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+    return getAllProjects().map((p) => ({ slug: p.slug }));
+}
 import TechIcon from "@/components/TechIcon";
 
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const project = projects.find(p => p.slug === slug);
+    const project = getProjectContent(slug);
 
     if (!project) {
         notFound();

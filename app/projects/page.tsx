@@ -2,10 +2,11 @@ import Container from "@/components/ui/Container";
 import { ArrowLeft, ArrowRight, Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/lib/data";
+import { getAllProjects } from "@/lib/project";
 import TechIcon from "@/components/TechIcon";
 
 export default function Projects() {
+    const projects = getAllProjects();
     return (
         <Container>
             <div className="space-y-4 mt-8">
