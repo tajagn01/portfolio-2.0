@@ -1,7 +1,7 @@
 import Container from "@/components/ui/Container";
 import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
 import Link from "next/link";
-import { blogs } from "@/lib/data";
+import { getBlogContent, getAllBlogs } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -10,12 +10,12 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-    return blogs.map((post) => ({ slug: post.slug }));
+    return getAllBlogs().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
-    const post = blogs.find((p) => p.slug === slug);
+    const post = getBlogContent(slug);
     if (!post) return {};
     return {
         title: post.title,
@@ -222,7 +222,7 @@ function inlineFormat(text: string): string {
 
 export default async function BlogPostPage({ params }: Props) {
     const { slug } = await params;
-    const post = blogs.find((p) => p.slug === slug);
+    const post = getBlogContent(slug);
 
     if (!post) notFound();
 

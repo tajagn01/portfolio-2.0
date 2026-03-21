@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
-import { projects, blogs } from '@/lib/data'
+import { projects } from '@/lib/data'
+import { getAllBlogs } from '@/lib/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://tajagn.vercel.app'
@@ -11,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }))
 
+    const blogs = getAllBlogs()
     const blogUrls = blogs.map((post) => ({
         url: `${baseUrl}/blog/${post.slug}`,
         lastModified: new Date(),

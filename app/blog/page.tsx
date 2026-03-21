@@ -1,7 +1,7 @@
 import Container from "@/components/ui/Container";
 import { ArrowLeft, ArrowRight, Clock, Calendar, Tag } from "lucide-react";
 import Link from "next/link";
-import { blogs } from "@/lib/data";
+import { getAllBlogs } from "@/lib/blog";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,6 +25,7 @@ function formatDate(dateStr: string) {
 }
 
 export default function BlogPage() {
+    const blogs = getAllBlogs();
     return (
         <Container>
             <div className="space-y-4 mt-8">
