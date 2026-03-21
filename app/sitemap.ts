@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { projects } from '@/lib/data'
+import { projects, blogs } from '@/lib/data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://tajagn.vercel.app'
@@ -9,6 +9,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
+    }))
+
+    const blogUrls = blogs.map((post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
     }))
 
     return [
@@ -24,6 +31,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 0.8,
         },
+        {
+            url: `${baseUrl}/blog`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
         ...projectUrls,
+        ...blogUrls,
     ]
 }

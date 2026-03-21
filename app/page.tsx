@@ -78,7 +78,7 @@ export default function Home() {
                                     <SiPostgresql className="h-3.5 w-3.5 text-blue-700 dark:text-blue-400" />
                                     PostgreSQL
                                 </a>
-                                <span>, with a strong emphasis on <span className="font-semibold text-zinc-900 dark:text-white">intuitive UI</span> design. I’m passionate about <span className="font-semibold text-zinc-900 dark:text-white">Three.js</span> and driven by a keen eye for detail and visual quality.</span>
+                                <span>with a strong emphasis on <span className="font-semibold text-zinc-900 dark:text-white">intuitive UI</span> design. I’m passionate about <span className="font-semibold text-zinc-900 dark:text-white">Three.js</span> and driven by a keen eye for detail and visual quality.</span>
                             </div>
 
                             <div className="flex flex-wrap gap-4 pt-2">

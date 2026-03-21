@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Moon, Sun, Home, Github, Linkedin, Twitter, FileText, Briefcase, Code2 } from "lucide-react";
+import { Search, Moon, Sun, Home, Github, Linkedin, Twitter, FileText, Briefcase, Code2, BookOpen } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { CommandMenu } from "./CommandMenu";
 
 const navItems = [
     { name: "Work", href: "/work" },
     { name: "Projects", href: "/projects" },
+    { name: "Blog", href: "/blog" },
 ];
 
 export default function Navbar() {
@@ -30,13 +31,20 @@ export default function Navbar() {
     const toggleTheme = () => {
         const newMode = !isDark;
         setIsDark(newMode);
-        if (newMode) {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        }
+
+        // Trigger blur animation globally
+        window.dispatchEvent(new Event("themeChange"));
+
+        // Add a slight delay to allow the blur out animation to start before swapping colors
+        setTimeout(() => {
+            if (newMode) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }, 150);
     };
 
     useEffect(() => {
@@ -143,6 +151,10 @@ export default function Navbar() {
                     <Link href="/projects" className={`transition-colors ${pathname === "/projects" ? "text-white" : "text-zinc-400 hover:text-white"}`}>
                         <Code2 className="h-6 w-6" />
                         <span className="sr-only">Projects</span>
+                    </Link>
+                    <Link href="/blog" className={`transition-colors ${pathname === "/blog" || pathname.startsWith("/blog/") ? "text-white" : "text-zinc-400 hover:text-white"}`}>
+                        <BookOpen className="h-6 w-6" />
+                        <span className="sr-only">Blog</span>
                     </Link>
                 </div>
             </div>
